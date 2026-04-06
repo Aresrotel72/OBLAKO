@@ -41,7 +41,8 @@
   --color-accent: var(--accent);
   --color-muted: var(--foreground-muted);
   --color-border: var(--border);
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-sans: var(--font-manrope), "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-syne), var(--font-manrope), sans-serif;
   --font-mono: "SF Mono", Menlo, Monaco, "Courier New", monospace;
 }
 
@@ -49,9 +50,7 @@
   border-color: var(--border);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* scroll-behavior managed by Lenis */
 
 body {
   background: var(--background);
@@ -59,6 +58,15 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography — display font for headings */
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
 
 /* Selection */
@@ -101,12 +109,13 @@ body {
 
 /* Card hover glow */
 .card-glow {
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 
 .card-glow:hover {
-  box-shadow: 0 0 30px rgba(0, 113, 227, 0.15);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(0, 113, 227, 0.22), 0 2px 12px rgba(0,0,0,0.4);
+  transform: translateY(-3px);
+  border-color: rgba(0, 113, 227, 0.35) !important;
 }
 
 /* Button styles */
@@ -130,10 +139,34 @@ body {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #a0c4ff 40%, #0071e3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Logo shimmer */
+@keyframes logo-shimmer {
+  0%   { background-position: -250% center; }
+  100% { background-position:  250% center; }
+}
+
+.logo-shimmer {
+  background: linear-gradient(
+    90deg,
+    #9a9a9a 0%,
+    #ffffff 20%,
+    #eaf0ff 38%,
+    #ffffff 50%,
+    #eaf0ff 62%,
+    #ffffff 80%,
+    #9a9a9a 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: logo-shimmer 4s linear infinite;
 }
 
 /* Fade in animation */
@@ -170,5 +203,140 @@ body {
   }
   100% {
     background-position: -200% 0;
+  }
+}
+
+/* Stagger fade-in for grid items */
+@keyframes staggerIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stagger-item {
+  opacity: 0;
+  animation: staggerIn 0.4s ease forwards;
+}
+.stagger-item:nth-child(1)  { animation-delay: 0.05s; }
+.stagger-item:nth-child(2)  { animation-delay: 0.10s; }
+.stagger-item:nth-child(3)  { animation-delay: 0.15s; }
+.stagger-item:nth-child(4)  { animation-delay: 0.20s; }
+.stagger-item:nth-child(5)  { animation-delay: 0.25s; }
+.stagger-item:nth-child(6)  { animation-delay: 0.30s; }
+.stagger-item:nth-child(7)  { animation-delay: 0.35s; }
+.stagger-item:nth-child(8)  { animation-delay: 0.40s; }
+.stagger-item:nth-child(9)  { animation-delay: 0.45s; }
+.stagger-item:nth-child(10) { animation-delay: 0.50s; }
+.stagger-item:nth-child(11) { animation-delay: 0.55s; }
+.stagger-item:nth-child(12) { animation-delay: 0.60s; }
+
+/* Glow pulse for hero accent */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.18; }
+  50%       { opacity: 0.28; }
+}
+
+.glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* Dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Header layout */
+.header-grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  height: 3.5rem;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 1023px) {
+  .header-nav {
+    display: none;
+  }
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Compositor-thread animations (no JS overhead) ── */
+
+@keyframes spin-cw  { to { transform: rotate(360deg);  } }
+@keyframes spin-ccw { to { transform: rotate(-360deg); } }
+@keyframes anim-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(4px); }
+}
+
+.ring-spin-cw  { animation: spin-cw  28s linear infinite; will-change: transform; }
+.ring-spin-ccw { animation: spin-ccw 18s linear infinite; will-change: transform; }
+.case-float    { animation: anim-float 5s ease-in-out infinite; will-change: transform; }
+.arrow-bounce  { animation: bounce-arrow 1.6s ease-in-out infinite; }
+
+/* ── Noise texture overlay ── */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ── Marquee animation ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Lenis smooth scroll ── */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ring-spin-cw, .ring-spin-ccw, .case-float, .arrow-bounce, .glow-pulse, .marquee-track {
+    animation: none;
   }
 }
