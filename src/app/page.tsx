@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import Hero from '@/components/ui/Hero'
+import CategoryGrid from '@/components/ui/CategoryGrid'
 import CasesShowcase from '@/components/ui/CasesShowcase'
 import ModelSelector from '@/components/cases/ModelSelector'
 import Features from '@/components/ui/Features'
@@ -32,6 +33,7 @@ export default function HomePage() {
     <>
       <Hero />
       <BrandMarquee />
+      <CategoryGrid />
       <Suspense fallback={<ProductsSkeleton />}>
         <CasesShowcase />
       </Suspense>

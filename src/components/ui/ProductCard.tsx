@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Zap, Sparkles } from 'lucide-react'
@@ -17,6 +17,16 @@ const stockConfig: Record<CaProduct['stockStatus'], { label: string; dot: string
   low: { label: 'Мало',      dot: 'bg-[#ffd60a]', text: 'text-[#ffd60a]' },
   out: { label: 'Нет',       dot: 'bg-[#6e6e73]', text: 'text-[#6e6e73]' },
 }
+
+// Neon glow color cycle
+const NEON_COLORS = [
+  { glow: 'rgba(139, 92, 246, 0.45)', border: 'rgba(139, 92, 246, 0.5)' },   // violet
+  { glow: 'rgba(6, 182, 212, 0.45)',  border: 'rgba(6, 182, 212, 0.5)' },    // cyan
+  { glow: 'rgba(244, 63, 94, 0.4)',   border: 'rgba(244, 63, 94, 0.45)' },   // rose
+  { glow: 'rgba(34, 197, 94, 0.4)',   border: 'rgba(34, 197, 94, 0.45)' },   // green
+  { glow: 'rgba(59, 130, 246, 0.45)', border: 'rgba(59, 130, 246, 0.5)' },   // blue
+  { glow: 'rgba(245, 158, 11, 0.4)',  border: 'rgba(245, 158, 11, 0.45)' },  // amber
+]
 
 // Feature annotations — появляются при hover (как lovi.care / augen.pro)
 function getFeatures(name: string): { label: string; value: string; icon: React.ElementType; position: string }[] {
@@ -45,6 +55,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const stock = stockConfig[product.stockStatus]
   const [isHovered, setIsHovered] = useState(false)
   const features = getFeatures(product.name)
+  const neonIdx = useRef(0)
+  const [neon, setNeon] = useState(NEON_COLORS[0]!)
+
+  const handleHoverStart = useCallback(() => {
+    neonIdx.current = (neonIdx.current + 1) % NEON_COLORS.length
+    setNeon(NEON_COLORS[neonIdx.current]!)
+    setIsHovered(true)
+  }, [])
 
   return (
     <motion.div
@@ -53,11 +71,28 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, delay: (index % 8) * 0.07, ease }}
       whileHover={{ y: -8, scale: 1.02 }}
-      onHoverStart={() => setIsHovered(true)}
+      onHoverStart={handleHoverStart}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-[#0a0a0a] border border-white/8 rounded-3xl overflow-visible cursor-pointer flex flex-col transition-colors hover:border-white/15 hover:bg-white/[0.02]"
-      style={{ willChange: 'transform' }}
+      data-cursor="card"
+      className="group relative bg-[#0a0a0a] border border-white/8 rounded-3xl overflow-visible cursor-pointer flex flex-col"
+      style={{
+        willChange: 'transform',
+        transition: 'box-shadow 0.4s ease, border-color 0.4s ease',
+        boxShadow: isHovered
+          ? `0 0 20px ${neon.glow}, 0 0 60px ${neon.glow}, inset 0 0 20px rgba(255,255,255,0.02)`
+          : '0 0 0 transparent',
+        borderColor: isHovered ? neon.border : 'rgba(255,255,255,0.08)',
+      }}
     >
+      {/* ── Neon glow backdrop ── */}
+      <div
+        className="absolute -inset-px rounded-3xl pointer-events-none transition-opacity duration-500"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${neon.glow} 0%, transparent 70%)`,
+        }}
+      />
+
       {/* ── Floating feature annotations (augen.pro style) ── */}
       <AnimatePresence>
         {isHovered && features.map((feat, i) => (
@@ -80,7 +115,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         ))}
       </AnimatePresence>
 
-      <Link href={`/catalog/${product.id}`} className="flex flex-col flex-1 overflow-hidden rounded-3xl">
+      <Link href={`/catalog/${product.id}`} className="flex flex-col flex-1 overflow-hidden rounded-3xl relative z-10">
 
         {/* Бейдж наличия */}
         {product.stockStatus !== 'ok' && (
@@ -143,7 +178,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
       {/* Кнопка «Бронь» появляется при hover — как в референсе */}
       {product.stockStatus !== 'out' && (
-        <div className="px-5 pb-5 -mt-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+        <div className="relative z-10 px-5 pb-5 -mt-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
           <Link
             href={`/catalog/${product.id}`}
             data-magnetic

@@ -144,6 +144,7 @@ export default function Hero() {
             <Link
               href="/cases"
               data-magnetic
+              data-cursor="cta"
               className="btn-primary inline-flex items-center justify-center gap-2 text-sm font-semibold group"
             >
               Выбрать чехол
