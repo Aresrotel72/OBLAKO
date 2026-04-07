@@ -1,32 +1,32 @@
 @import "tailwindcss";
 
-/* OBLAKO — Dark Premium Theme */
+/* OBLAKO — Light Premium Theme (Apple Style) */
 
 :root {
-  /* Background */
-  --background: #000000;
-  --background-secondary: #1d1d1f;
-  --background-card: #161617;
-  --background-elevated: #2d2d2f;
+  /* Background — light */
+  --background: #f5f5f7;
+  --background-secondary: #e8e8ec;
+  --background-card: #ffffff;
+  --background-elevated: #dddde1;
 
   /* Foreground */
-  --foreground: #f5f5f7;
-  --foreground-secondary: #86868b;
+  --foreground: #1d1d1f;
+  --foreground-secondary: #424245;
   --foreground-muted: #6e6e73;
 
-  /* Accent (Electric Violet) */
-  --accent: #8b5cf6;
-  --accent-hover: #7c3aed;
-  --accent-active: #6d28d9;
+  /* Accent (Apple Blue) */
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-active: #006edb;
 
   /* Status */
   --success: #30d158;
-  --warning: #ffd60a;
+  --warning: #f59e0b;
   --error: #ff453a;
 
   /* Border */
-  --border: rgba(255, 255, 255, 0.1);
-  --border-hover: rgba(255, 255, 255, 0.2);
+  --border: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.2);
 
   /* Radius */
   --radius-sm: 8px;
@@ -34,6 +34,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
 }
+
 
 @theme inline {
   --color-background: var(--background);
@@ -102,20 +103,21 @@ h1, h2, h3 {
 
 /* Glass effect */
 .glass {
-  background: rgba(29, 29, 31, 0.8);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
-/* Card hover glow */
+/* Card hover glow — реагирует на курсор */
 .card-glow {
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card-glow:hover {
-  box-shadow: 0 8px 40px rgba(139, 92, 246, 0.22), 0 2px 12px rgba(0,0,0,0.4);
-  transform: translateY(-3px);
-  border-color: rgba(139, 92, 246, 0.35) !important;
+  box-shadow: 0 12px 48px rgba(0, 113, 227, 0.14), 0 2px 16px rgba(0,0,0,0.06);
+  transform: translateY(-4px);
+  border-color: rgba(0, 113, 227, 0.2) !important;
 }
 
 /* Button styles */
@@ -139,7 +141,7 @@ h1, h2, h3 {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 40%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #1d1d1f 0%, #0071e3 60%, #0077ed 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -154,13 +156,13 @@ h1, h2, h3 {
 .logo-shimmer {
   background: linear-gradient(
     90deg,
-    #9a9a9a 0%,
-    #ffffff 20%,
-    #eaf0ff 38%,
-    #ffffff 50%,
-    #eaf0ff 62%,
-    #ffffff 80%,
-    #9a9a9a 100%
+    #6e6e73 0%,
+    #1d1d1f 20%,
+    #0071e3 38%,
+    #1d1d1f 50%,
+    #0071e3 62%,
+    #1d1d1f 80%,
+    #6e6e73 100%
   );
   background-size: 250% auto;
   -webkit-background-clip: text;
@@ -231,8 +233,8 @@ h1, h2, h3 {
 
 /* Glow pulse for hero accent */
 @keyframes glowPulse {
-  0%, 100% { opacity: 0.18; }
-  50%       { opacity: 0.28; }
+  0%, 100% { opacity: 0.12; }
+  50%       { opacity: 0.22; }
 }
 
 .glow-pulse {
@@ -241,7 +243,7 @@ h1, h2, h3 {
 
 /* Dot grid pattern */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -265,6 +267,19 @@ h1, h2, h3 {
   .header-nav {
     display: none;
   }
+}
+
+/* Header background — light default */
+.header-oblako {
+  background: rgba(245, 245, 247, 0.92);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.header-oblako.scrolled {
+  background: rgba(245, 245, 247, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Hide scrollbar utility */
@@ -300,7 +315,7 @@ h1, h2, h3 {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.03;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
@@ -339,68 +354,4 @@ html.lenis, html.lenis body {
   .ring-spin-cw, .ring-spin-ccw, .case-float, .arrow-bounce, .glow-pulse, .marquee-track {
     animation: none;
   }
-}
-
-/* ── Light theme ── */
-html[data-theme="light"] {
-  --background: #f5f5f7;
-  --background-secondary: #e8e8ec;
-  --background-card: #ffffff;
-  --background-elevated: #dddde1;
-  --foreground: #1d1d1f;
-  --foreground-secondary: #424245;
-  --foreground-muted: #6e6e73;
-  --accent: #7c3aed;
-  --accent-hover: #6d28d9;
-  --accent-active: #5b21b6;
-  --border: rgba(0, 0, 0, 0.1);
-  --border-hover: rgba(0, 0, 0, 0.2);
-}
-
-html[data-theme="light"] body {
-  background: var(--background);
-  color: var(--foreground);
-}
-
-html[data-theme="light"] .glass {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
-html[data-theme="light"] .header-oblako {
-  background: rgba(250, 250, 252, 0.92);
-  border-bottom-color: rgba(0,0,0,0.08);
-}
-
-/* ── Morphing cursor aura (капля воды) ── */
-@keyframes blob-morph {
-  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  20%  { border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
-  40%  { border-radius: 55% 45% 40% 60% / 35% 65% 45% 55%; }
-  60%  { border-radius: 45% 55% 65% 35% / 60% 40% 55% 45%; }
-  80%  { border-radius: 50% 50% 35% 65% / 45% 55% 40% 60%; }
-  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-}
-
-.aura-blob {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle at 40% 40%,
-    rgba(139, 92, 246, 0.18) 0%,
-    rgba(6, 182, 212, 0.1) 45%,
-    transparent 70%
-  );
-  filter: blur(32px);
-  animation: blob-morph 9s ease-in-out infinite;
-  will-change: transform, border-radius;
-}
-
-html[data-theme="light"] .aura-blob {
-  background: radial-gradient(
-    circle at 40% 40%,
-    rgba(139, 92, 246, 0.12) 0%,
-    rgba(6, 182, 212, 0.07) 45%,
-    transparent 70%
-  );
 }

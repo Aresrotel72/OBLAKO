@@ -1,91 +1,103 @@
 'use client'
 
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import {
-  Smartphone,
-  Shield,
-  Headphones,
-  Battery,
-  Cable,
-  Watch,
-  Speaker,
-  Layers,
-} from 'lucide-react'
+import { Search, Shield, Layers, Headphones, Battery, Cable, Watch, Speaker, Smartphone } from 'lucide-react'
 
 const categories = [
-  { name: 'Чехлы',      icon: Shield,      href: '/cases',                         color: '#8b5cf6' },
-  { name: 'Стёкла',     icon: Layers,      href: '/catalog?category=glass',        color: '#0ea5e9' },
-  { name: 'Наушники',   icon: Headphones,  href: '/catalog?category=headphones',   color: '#f43f5e' },
-  { name: 'Зарядки',    icon: Battery,      href: '/catalog?category=chargers',     color: '#22c55e' },
-  { name: 'Кабели',     icon: Cable,       href: '/catalog?category=cables',       color: '#f59e0b' },
-  { name: 'Часы',       icon: Watch,       href: '/catalog?category=watches',      color: '#ec4899' },
-  { name: 'Колонки',    icon: Speaker,     href: '/catalog?category=speakers',     color: '#14b8a6' },
-  { name: 'Аксессуары', icon: Smartphone,  href: '/catalog',                       color: '#6366f1' },
+  { name: 'Чехлы',      icon: Shield,      href: '/cases'                        },
+  { name: 'Стёкла',     icon: Layers,      href: '/catalog?category=glass'       },
+  { name: 'Наушники',   icon: Headphones,  href: '/catalog?category=headphones'  },
+  { name: 'Зарядки',    icon: Battery,     href: '/catalog?category=chargers'    },
+  { name: 'Кабели',     icon: Cable,       href: '/catalog?category=cables'      },
+  { name: 'Часы',       icon: Watch,       href: '/catalog?category=watches'     },
+  { name: 'Колонки',    icon: Speaker,     href: '/catalog?category=speakers'    },
+  { name: 'Все товары', icon: Smartphone,  href: '/catalog'                      },
 ]
 
-const ease = [0.16, 1, 0.3, 1] as const
-
 export default function CategoryGrid() {
+  const [query, setQuery] = useState('')
+  const router = useRouter()
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault()
+    const q = query.trim()
+    if (q) router.push(`/catalog?search=${encodeURIComponent(q)}`)
+  }
+
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+    <section className="py-14 px-4 bg-[var(--background)]">
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-10">
+
+        {/* Search bar */}
+        <motion.form
+          onSubmit={handleSearch}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, ease }}
-          className="text-center mb-10"
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-[560px]"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
-            Категории
-          </h2>
-          <p className="text-sm text-[#86868b]">Найди то, что нужно</p>
-        </motion.div>
+          <div className="relative group">
+            <Search
+              size={17}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--foreground-muted)] pointer-events-none transition-colors duration-200 group-focus-within:text-[var(--accent)]"
+            />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Поиск аксессуаров…"
+              className="
+                w-full
+                bg-[var(--background-card)] border border-[var(--border)]
+                hover:border-[var(--border-hover)] focus:border-[#0071e3]/50
+                rounded-full
+                pl-11 pr-5 py-3
+                text-sm text-[var(--foreground)] placeholder-[var(--foreground-muted)]
+                outline-none
+                transition-all duration-200
+                shadow-sm
+              "
+            />
+          </div>
+        </motion.form>
 
-        {/* Grid */}
-        <div className="grid grid-cols-4 sm:grid-cols-8 gap-3 sm:gap-4">
+        {/* Category circles */}
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-8 sm:gap-x-8">
           {categories.map((cat, i) => {
             const Icon = cat.icon
             return (
               <motion.div
                 key={cat.name}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-20px' }}
-                transition={{ duration: 0.45, delay: i * 0.05, ease }}
+                transition={{ duration: 0.4, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Link
-                  href={cat.href}
-                  data-cursor="icon"
-                  className="group flex flex-col items-center gap-2.5 py-5 px-2 rounded-2xl border border-white/6 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/15 transition-all duration-300 relative overflow-hidden"
-                >
-                  {/* Glow on hover */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(circle at 50% 30%, ${cat.color}15 0%, transparent 70%)`,
-                    }}
-                  />
-
-                  {/* Icon */}
-                  <div
-                    className="relative z-10 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      background: `${cat.color}12`,
-                      border: `1px solid ${cat.color}25`,
-                    }}
-                  >
+                <Link href={cat.href} className="group flex flex-col items-center gap-3 w-[80px] sm:w-[96px]">
+                  <div className="
+                    w-[80px] h-[80px] sm:w-[96px] sm:h-[96px]
+                    rounded-full
+                    border border-[var(--border)]
+                    bg-[var(--background-card)]
+                    flex items-center justify-center
+                    transition-all duration-300
+                    group-hover:border-[#0071e3]/40
+                    group-hover:bg-[#0071e3]/6
+                    group-hover:scale-105
+                    group-active:scale-95
+                    shadow-sm
+                  ">
                     <Icon
-                      size={20}
-                      className="transition-colors duration-300"
-                      style={{ color: cat.color }}
+                      size={28}
+                      strokeWidth={1.5}
+                      className="text-[var(--foreground-muted)] transition-colors duration-300 group-hover:text-[#0071e3]"
                     />
                   </div>
-
-                  {/* Label */}
-                  <span className="relative z-10 text-xs font-medium text-[#86868b] group-hover:text-white transition-colors duration-300 text-center leading-tight">
+                  <span className="text-[12px] sm:text-[13px] text-[var(--foreground-secondary)] group-hover:text-[#0071e3] transition-colors duration-300 text-center leading-tight">
                     {cat.name}
                   </span>
                 </Link>
@@ -93,6 +105,7 @@ export default function CategoryGrid() {
             )
           })}
         </div>
+
       </div>
     </section>
   )

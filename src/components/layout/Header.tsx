@@ -4,39 +4,13 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import {
-  Search, User, Menu, ChevronDown,
-  Smartphone, Headphones, Zap, Shield,
-  Car, Gamepad2, Camera, Watch, HardDrive, Gift, Tag, X,
-  Moon, Sun, LogIn
+  User, Menu, ChevronDown,
+  Headphones, Zap, Shield,
+  Car, Gamepad2, Camera, Watch, HardDrive, Gift, Tag, LogIn
 } from 'lucide-react'
 import MobileNav from './MobileNav'
 import OblakLogo from './OblakLogo'
 import { useAuth } from '@/hooks/useAuth'
-import { useTheme } from '@/components/providers/ThemeProvider'
-
-// ─── Announcement bar ─────────────────────────────────────────────────────────
-
-function AnnouncementBar() {
-  const [visible, setVisible] = useState(true)
-  if (!visible) return null
-  return (
-    <div className="bg-[#0a0a0a] border-b border-white/5 text-[11px] font-medium py-2 flex items-center">
-      <span className="w-7 shrink-0" />
-      <span className="flex-1 text-center text-[#a78bfa]">
-        📍 г. Полоцк, ул. Богдановича 14, ТЦ Green
-        <span className="mx-3 text-white/20">·</span>
-        <span className="text-white/50">Каждый день 10:00 — 21:00</span>
-      </span>
-      <button
-        onClick={() => setVisible(false)}
-        className="w-7 shrink-0 flex items-center justify-center opacity-40 hover:opacity-80 transition-opacity"
-        aria-label="Закрыть"
-      >
-        <X size={13} />
-      </button>
-    </div>
-  )
-}
 
 // ─── Categories config ────────────────────────────────────────────────────────
 
@@ -80,10 +54,10 @@ const IPHONE_GROUPS = [
 ]
 
 const ALL_CATEGORIES = [
-  { icon: Shield,     label: 'Защитные стёкла',    href: '/catalog?categoryName=Стекла',       color: '#4ade80' },
-  { icon: Headphones, label: 'Наушники',            href: '/catalog?categoryName=Наушники',     color: '#c084fc' },
+  { icon: Shield,     label: 'Защитные стёкла',    href: '/catalog?categoryName=Стекла',       color: '#30d158' },
+  { icon: Headphones, label: 'Наушники',            href: '/catalog?categoryName=Наушники',     color: '#ac8ffc' },
   { icon: Headphones, label: 'Колонки',             href: '/catalog?categoryName=Колонки',      color: '#818cf8' },
-  { icon: Zap,        label: 'Зарядные устройства', href: '/catalog?categoryName=Зарядки',      color: '#facc15' },
+  { icon: Zap,        label: 'Зарядные устройства', href: '/catalog?categoryName=Зарядки',      color: '#f59e0b' },
   { icon: Zap,        label: 'Кабели',              href: '/catalog?categoryName=Кабели',       color: '#fb923c' },
   { icon: Zap,        label: 'Переходники',         href: '/catalog?categoryName=Переходники',  color: '#f97316' },
   { icon: Car,        label: 'Авто-аксессуары',     href: '/catalog?categoryName=Авто',         color: '#38bdf8' },
@@ -99,18 +73,18 @@ const ALL_CATEGORIES = [
 
 function IphoneMegaMenu() {
   return (
-    <div className="bg-[#0e0e10] border border-white/10 rounded-2xl shadow-2xl shadow-black/60 p-5 w-[440px]">
+    <div className="bg-[var(--background-card)] border border-[var(--border)] rounded-2xl shadow-xl shadow-black/8 p-5 w-[440px]">
       <div className="grid grid-cols-2 gap-x-6 gap-y-1">
         {IPHONE_GROUPS.map((g) => (
           <div key={g.series}>
-            <p className="text-[10px] font-bold text-[#a78bfa] uppercase tracking-widest mb-2 mt-3 first:mt-0">
+            <p className="text-[10px] font-bold text-[#0071e3] uppercase tracking-widest mb-2 mt-3 first:mt-0">
               {g.series}
             </p>
             {g.models.map((m) => (
               <Link
                 key={m.id}
                 href={`/cases?model=${m.id}`}
-                className="block px-2 py-1.5 rounded-lg text-sm text-[#86868b] hover:text-white hover:bg-white/5 transition-all"
+                className="block px-2 py-1.5 rounded-lg text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-all"
               >
                 {m.label}
               </Link>
@@ -118,10 +92,10 @@ function IphoneMegaMenu() {
           </div>
         ))}
       </div>
-      <div className="mt-4 pt-4 border-t border-white/8">
+      <div className="mt-4 pt-4 border-t border-[var(--border)]">
         <Link
           href="/cases"
-          className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-[#a78bfa] hover:bg-[#8b5cf6]/10 transition-all"
+          className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-[#0071e3] hover:bg-[#0071e3]/8 transition-all"
         >
           Все чехлы для iPhone
           <span>→</span>
@@ -135,23 +109,23 @@ function IphoneMegaMenu() {
 
 function CatalogMegaMenu() {
   return (
-    <div className="bg-[#0e0e10] border border-white/10 rounded-2xl shadow-2xl shadow-black/60 p-5 w-[480px]">
+    <div className="bg-[var(--background-card)] border border-[var(--border)] rounded-2xl shadow-xl shadow-black/8 p-5 w-[480px]">
       <div className="grid grid-cols-3 gap-1.5">
         {ALL_CATEGORIES.map(({ icon: Icon, label, href, color }) => (
           <Link
             key={label}
             href={href}
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-[#86868b] hover:text-white hover:bg-white/5 transition-all group"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-all group"
           >
             <Icon size={14} style={{ color }} className="shrink-0 group-hover:scale-110 transition-transform" />
             <span className="leading-tight text-xs">{label}</span>
           </Link>
         ))}
       </div>
-      <div className="mt-4 pt-4 border-t border-white/8">
+      <div className="mt-4 pt-4 border-t border-[var(--border)]">
         <Link
           href="/catalog"
-          className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-[#86868b] hover:text-white hover:bg-white/5 transition-all"
+          className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-all"
         >
           Весь каталог
           <span>→</span>
@@ -179,7 +153,7 @@ function NavItem({
       <Link
         href={href}
         className={`relative flex items-center gap-1 text-xs font-semibold uppercase tracking-widest transition-colors duration-150 py-1 ${
-          isActive ? 'text-white' : 'text-[#6e6e73] hover:text-white'
+          isActive ? 'text-[var(--foreground)]' : 'text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
         }`}
       >
         {label}
@@ -193,8 +167,8 @@ function NavItem({
         <span
           className={`absolute -bottom-0.5 left-0 h-px transition-all duration-300 ${
             isActive
-              ? 'w-full bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.8)]'
-              : 'w-0 group-hover/item:w-full bg-[#8b5cf6]/60'
+              ? 'w-full bg-[#0071e3] shadow-[0_0_6px_rgba(0,113,227,0.6)]'
+              : 'w-0 group-hover/item:w-full bg-[#0071e3]/60'
           }`}
         />
       </Link>
@@ -216,22 +190,6 @@ function NavItem({
   )
 }
 
-// ─── Theme Toggle ─────────────────────────────────────────────────────────────
-
-function ThemeToggle() {
-  const { theme, toggle } = useTheme()
-  return (
-    <button
-      onClick={toggle}
-      className="relative w-8 h-8 rounded-full flex items-center justify-center text-[#6e6e73] hover:text-white hover:bg-white/8 transition-all duration-200"
-      aria-label={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
-      title={theme === 'dark' ? 'Включить день' : 'Включить ночь'}
-    >
-      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-    </button>
-  )
-}
-
 // ─── Account Button ───────────────────────────────────────────────────────────
 
 function AccountButton({ user }: { user: { name: string } | null }) {
@@ -239,12 +197,12 @@ function AccountButton({ user }: { user: { name: string } | null }) {
     return (
       <Link
         href="/account"
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#8b5cf6]/40 bg-[#8b5cf6]/8 hover:bg-[#8b5cf6]/15 hover:border-[#8b5cf6]/60 transition-all text-sm"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#0071e3]/35 bg-[#0071e3]/6 hover:bg-[#0071e3]/12 hover:border-[#0071e3]/55 transition-all text-sm"
       >
-        <div className="w-5 h-5 rounded-full bg-[#8b5cf6]/30 flex items-center justify-center">
-          <User size={11} className="text-[#a78bfa]" />
+        <div className="w-5 h-5 rounded-full bg-[#0071e3]/20 flex items-center justify-center">
+          <User size={11} className="text-[#0071e3]" />
         </div>
-        <span className="hidden sm:block text-xs font-semibold text-[#a78bfa] max-w-[72px] truncate">
+        <span className="hidden sm:block text-xs font-semibold text-[#0071e3] max-w-[72px] truncate">
           {user.name.split(' ')[0]}
         </span>
       </Link>
@@ -254,7 +212,7 @@ function AccountButton({ user }: { user: { name: string } | null }) {
   return (
     <Link
       href="/account"
-      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/12 hover:border-[#8b5cf6]/50 hover:bg-[#8b5cf6]/8 transition-all text-xs font-semibold text-[#86868b] hover:text-white"
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border-hover)] hover:border-[#0071e3]/45 hover:bg-[#0071e3]/6 transition-all text-xs font-semibold text-[var(--foreground-secondary)] hover:text-[#0071e3]"
       aria-label="Войти"
     >
       <LogIn size={14} />
@@ -279,17 +237,11 @@ export default function Header() {
 
   return (
     <>
-      <AnnouncementBar />
-
       <header
-        className={`header-oblako sticky top-0 z-50 border-b transition-all duration-300 ${
-          scrolled
-            ? 'bg-[#070709]/95 backdrop-blur-md border-[#8b5cf6]/15'
-            : 'bg-[#070709] border-white/6'
-        }`}
+        className={`header-oblako sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? 'scrolled' : ''}`}
       >
-        {/* Thin violet glow line at top */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8b5cf6]/40 to-transparent" />
+        {/* Thin blue glow line at top */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#0071e3]/25 to-transparent" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="header-grid">
@@ -325,11 +277,11 @@ export default function Header() {
               />
               <Link
                 href="/sale"
-                className="relative flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#f87171] hover:text-red-400 transition-colors py-1 group/sale"
+                className="relative flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#f87171] hover:text-red-500 transition-colors py-1 group/sale"
               >
                 <Tag size={12} />
                 Sale
-                <span className="px-1.5 py-0.5 rounded-full bg-[#ff453a]/15 text-[9px] font-black tracking-wide text-[#f87171] animate-pulse">
+                <span className="px-1.5 py-0.5 rounded-full bg-[#ff453a]/12 text-[9px] font-black tracking-wide text-[#f87171] animate-pulse">
                   −70%
                 </span>
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 group-hover/sale:w-full bg-[#f87171]/60 transition-all duration-300" />
@@ -338,12 +290,11 @@ export default function Header() {
 
             {/* Right actions */}
             <div className="flex items-center gap-1.5 justify-self-end">
-              <ThemeToggle />
               <AccountButton user={user} />
 
               {/* Mobile burger */}
               <button
-                className="lg:hidden p-2 text-[#6e6e73] hover:text-white transition-colors rounded-full hover:bg-white/5"
+                className="lg:hidden p-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors rounded-full hover:bg-[var(--foreground)]/5"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Открыть меню"
               >

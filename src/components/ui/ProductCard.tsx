@@ -105,7 +105,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             className={`absolute z-20 ${feat.position}`}
           >
             <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-sm shadow-lg shadow-black/20">
-              <feat.icon size={12} className="text-[#0071e3]" />
+              <feat.icon size={12} className="text-[#8b5cf6]" />
               <div className="flex flex-col">
                 <span className="text-[8px] font-medium text-[#6e6e73] uppercase tracking-wider leading-none">{feat.label}</span>
                 <span className="text-[11px] font-bold text-black leading-tight">{feat.value}</span>
