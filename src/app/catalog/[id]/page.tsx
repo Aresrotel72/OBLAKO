@@ -17,7 +17,7 @@ export async function generateMetadata({
     const product = await getProduct(id)
     return {
       title: `${product.name} — OBLAKO`,
-      description: product.description || `${product.name} — мобильные аксессуары в Минске`,
+      description: product.description || `${product.name} — мобильные аксессуары в Полоцке`,
     }
   } catch {
     return { title: 'Товар не найден — OBLAKO' }
@@ -51,23 +51,23 @@ export default async function ProductPage({
       <div className="max-w-5xl mx-auto">
 
         {/* Хлебные крошки */}
-        <nav className="flex items-center gap-2 text-sm text-[#6e6e73] mb-8">
-          <Link href="/" className="hover:text-white transition-colors">Главная</Link>
+        <nav className="flex items-center gap-2 text-sm text-foreground-muted mb-8">
+          <Link href="/" className="hover:text-foreground transition-colors">Главная</Link>
           <span>/</span>
-          <Link href="/catalog" className="hover:text-white transition-colors">Каталог</Link>
+          <Link href="/catalog" className="hover:text-foreground transition-colors">Каталог</Link>
           {product.category && (
             <>
               <span>/</span>
               <Link
                 href={`/catalog?category=${encodeURIComponent(product.category.name)}`}
-                className="hover:text-white transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {product.category.name}
               </Link>
             </>
           )}
           <span>/</span>
-          <span className="text-white line-clamp-1 max-w-[200px]">{product.name}</span>
+          <span className="text-foreground line-clamp-1 max-w-[200px]">{product.name}</span>
         </nav>
 
         {/* Основной блок */}
@@ -84,27 +84,27 @@ export default async function ProductPage({
             {product.category && (
               <Link
                 href={`/catalog?category=${encodeURIComponent(product.category.name)}`}
-                className="inline-flex w-fit px-3 py-1 rounded-full text-xs font-medium bg-[#8b5cf6]/15 border border-[#8b5cf6]/30 text-[#8b5cf6] hover:bg-[#8b5cf6]/25 transition-colors"
+                className="inline-flex w-fit px-3 py-1 rounded-full text-xs font-medium bg-[#0071e3]/10 border border-[#0071e3]/25 text-[#0071e3] hover:bg-[#0071e3]/18 transition-colors"
               >
                 {product.category.name}
               </Link>
             )}
 
             {/* Название */}
-            <h1 className="text-2xl sm:text-3xl font-semibold text-white leading-snug">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground leading-snug">
               {product.name}
             </h1>
 
             {/* Артикул */}
             {product.article && (
-              <p className="text-sm text-[#6e6e73]">
-                Артикул: <span className="text-[#86868b] font-mono">{product.article}</span>
+              <p className="text-sm text-foreground-muted">
+                Артикул: <span className="text-foreground-secondary font-mono">{product.article}</span>
               </p>
             )}
 
             {/* Цена */}
             <div className="flex items-baseline gap-3">
-              <span className="text-4xl font-bold text-white">
+              <span className="text-4xl font-bold text-foreground">
                 {formatPrice(product.sellingPrice)}
               </span>
             </div>
@@ -114,7 +114,7 @@ export default async function ProductPage({
               <span className={`inline-block w-2 h-2 rounded-full ${stock.dot}`} />
               <span className={`text-sm font-medium ${stock.color}`}>{stock.text}</span>
               {product.stockStatus !== 'out' && (
-                <span className="text-sm text-[#6e6e73]">
+                <span className="text-sm text-foreground-muted">
                   · {product.quantity} {product.unit}
                 </span>
               )}
@@ -122,7 +122,7 @@ export default async function ProductPage({
 
             {/* Описание */}
             {product.description && (
-              <p className="text-sm text-[#86868b] leading-relaxed border-t border-white/8 pt-4">
+              <p className="text-sm text-foreground-secondary leading-relaxed border-t border-border pt-4">
                 {product.description}
               </p>
             )}
@@ -143,12 +143,12 @@ export default async function ProductPage({
               ) : (
                 <button
                   disabled
-                  className="w-full py-3.5 rounded-xl bg-[#1c1c1e] border border-white/10 text-[#6e6e73] text-sm font-semibold cursor-not-allowed select-none"
+                  className="w-full py-3.5 rounded-xl bg-background-secondary border border-border text-foreground-muted text-sm font-semibold cursor-not-allowed select-none"
                 >
                   Нет в наличии
                 </button>
               )}
-              <p className="text-xs text-center text-[#6e6e73]">
+              <p className="text-xs text-center text-foreground-muted">
                 Бронирование · самовывоз из магазина
               </p>
             </div>
@@ -163,10 +163,10 @@ export default async function ProductPage({
               ].map(({ label, value }) => (
                 <div
                   key={label}
-                  className="flex flex-col gap-0.5 p-3 rounded-xl bg-[#161617] border border-white/8"
+                  className="flex flex-col gap-0.5 p-3 rounded-xl bg-background-card border border-border"
                 >
-                  <span className="text-[10px] text-[#6e6e73] uppercase tracking-wide">{label}</span>
-                  <span className="text-sm text-white">{value}</span>
+                  <span className="text-[10px] text-foreground-muted uppercase tracking-wide">{label}</span>
+                  <span className="text-sm text-foreground">{value}</span>
                 </div>
               ))}
             </div>
@@ -176,7 +176,7 @@ export default async function ProductPage({
         {/* Похожие товары */}
         {product.category && (
           <section>
-            <h2 className="text-xl font-semibold text-white mb-6">
+            <h2 className="text-xl font-semibold text-foreground mb-6">
               Ещё из категории «{product.category.name}»
             </h2>
             <Suspense fallback={<CatalogGridSkeleton count={4} />}>

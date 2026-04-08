@@ -9,8 +9,8 @@ export default function RegisterPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold text-white">Регистрация</h1>
-        <p className="mt-1 text-sm text-[#86868b]">
+        <h1 className="text-2xl font-semibold text-foreground">Регистрация</h1>
+        <p className="mt-1 text-sm text-foreground-muted">
           Создайте аккаунт для удобного бронирования
         </p>
       </div>

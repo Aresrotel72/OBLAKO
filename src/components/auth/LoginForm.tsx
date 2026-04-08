@@ -12,13 +12,13 @@ export default function LoginForm() {
   return (
     <form action={action} className="space-y-5">
       {state.message && (
-        <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
+        <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-500">
           {state.message}
         </div>
       )}
 
       <div className="space-y-1">
-        <label htmlFor="login" className="block text-sm text-[#86868b]">
+        <label htmlFor="login" className="block text-sm text-foreground-secondary">
           Телефон или email
         </label>
         <input
@@ -27,16 +27,16 @@ export default function LoginForm() {
           type="text"
           autoComplete="username"
           placeholder="+375291234567 или email@mail.com"
-          className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-[#48484a] focus:outline-none focus:border-white/30 focus:bg-white/8 transition-colors"
+          className="w-full rounded-xl bg-background-card border border-border px-4 py-3 text-sm text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-[#0071e3]/50 transition-colors shadow-sm"
         />
         {state.errors?.login?.map((e) => (
-          <p key={e} className="text-xs text-red-400">{e}</p>
+          <p key={e} className="text-xs text-red-500">{e}</p>
         ))}
       </div>
 
       <div className="space-y-1">
         <div className="flex justify-between items-center">
-          <label htmlFor="password" className="block text-sm text-[#86868b]">
+          <label htmlFor="password" className="block text-sm text-foreground-secondary">
             Пароль
           </label>
         </div>
@@ -46,24 +46,24 @@ export default function LoginForm() {
           type="password"
           autoComplete="current-password"
           placeholder="••••••••"
-          className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-[#48484a] focus:outline-none focus:border-white/30 focus:bg-white/8 transition-colors"
+          className="w-full rounded-xl bg-background-card border border-border px-4 py-3 text-sm text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-[#0071e3]/50 transition-colors shadow-sm"
         />
         {state.errors?.password?.map((e) => (
-          <p key={e} className="text-xs text-red-400">{e}</p>
+          <p key={e} className="text-xs text-red-500">{e}</p>
         ))}
       </div>
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-xl bg-white text-black font-medium py-3 text-sm hover:bg-[#f5f5f7] active:bg-[#e8e8ed] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full rounded-xl bg-[#0071e3] text-white font-medium py-3 text-sm hover:bg-[#0077ed] active:bg-[#006edb] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {pending ? 'Входим...' : 'Войти'}
       </button>
 
-      <p className="text-center text-sm text-[#86868b]">
+      <p className="text-center text-sm text-foreground-muted">
         Нет аккаунта?{' '}
-        <Link href="/auth/register" className="text-white hover:underline">
+        <Link href="/auth/register" className="text-[#0071e3] hover:underline">
           Зарегистрироваться
         </Link>
       </p>

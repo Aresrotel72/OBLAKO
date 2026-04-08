@@ -35,7 +35,7 @@ export default function ReservationButton({ product, productPagePath }: Props) {
     <>
       <button
         onClick={handleClick}
-        className="w-full py-3.5 rounded-xl bg-[#8b5cf6] text-white text-sm font-semibold hover:bg-[#7c3aed] active:scale-[0.98] transition-all select-none"
+        className="w-full py-3.5 rounded-xl bg-[#0071e3] text-white text-sm font-semibold hover:bg-[#0077ed] active:scale-[0.98] transition-all select-none"
       >
         Забронировать
       </button>

@@ -25,10 +25,10 @@ export default async function CatalogPage({
       <div className="max-w-5xl mx-auto">
         {/* Заголовок */}
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-semibold text-white mb-2">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-foreground mb-2">
             Каталог
           </h1>
-          <p className="text-[#86868b]">
+          <p className="text-foreground-muted">
             Мобильные аксессуары: чехлы, стекла, зарядки и многое другое
           </p>
         </div>

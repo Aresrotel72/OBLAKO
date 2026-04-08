@@ -33,7 +33,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col items-center justify-center text-center px-4 py-36 sm:py-48 overflow-hidden bg-[var(--background)]"
+      className="relative flex flex-col items-center justify-center text-center px-4 py-36 sm:py-48 overflow-hidden bg-background"
     >
       {/* Shapes */}
       <div ref={shapesRef} className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -75,7 +75,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease }}
-          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-[var(--foreground)] mb-6"
+          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-foreground mb-6"
         >
           Защити свой
           <br />
@@ -87,7 +87,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.25, ease }}
-          className="text-lg sm:text-xl text-[var(--foreground-secondary)] leading-relaxed max-w-xl mx-auto mb-10 font-light"
+          className="text-lg sm:text-xl text-foreground-secondary leading-relaxed max-w-xl mx-auto mb-10 font-light"
         >
           Премиальные чехлы для каждой модели. Актуальные остатки,
           бронирование онлайн — забирай сегодня.
@@ -116,7 +116,7 @@ export default function Hero() {
             <Link
               href="/catalog"
               data-magnetic
-              className="inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-medium text-[var(--foreground-secondary)] border border-[var(--border-hover)] hover:border-[#0071e3]/40 hover:text-[#0071e3] hover:bg-[#0071e3]/5 transition-all duration-200"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-medium text-foreground-secondary border border-border-hover hover:border-[#0071e3]/40 hover:text-[#0071e3] hover:bg-[#0071e3]/5 transition-all duration-200"
             >
               Весь каталог
             </Link>
@@ -128,7 +128,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className="mt-14 flex flex-wrap justify-center gap-8 text-xs text-[var(--foreground-muted)]"
+          className="mt-14 flex flex-wrap justify-center gap-8 text-xs text-foreground-muted"
         >
           {[
             { val: '200+', label: 'моделей чехлов' },
@@ -136,7 +136,7 @@ export default function Hero() {
             { val: '14 дн',label: 'возврат'         },
           ].map(({ val, label }) => (
             <div key={label} className="flex items-center gap-1.5">
-              <span className="font-semibold text-[var(--foreground-secondary)] text-sm">{val}</span>
+              <span className="font-semibold text-foreground-secondary text-sm">{val}</span>
               <span>{label}</span>
             </div>
           ))}
@@ -144,7 +144,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--background)] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   )
 }

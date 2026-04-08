@@ -28,7 +28,7 @@ export default function CategoryGrid() {
   }
 
   return (
-    <section className="py-14 px-4 bg-[var(--background)]">
+    <section className="py-14 px-4 bg-background">
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-10">
 
         {/* Search bar */}
@@ -43,7 +43,7 @@ export default function CategoryGrid() {
           <div className="relative group">
             <Search
               size={17}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--foreground-muted)] pointer-events-none transition-colors duration-200 group-focus-within:text-[var(--accent)]"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground-muted pointer-events-none transition-colors duration-200 group-focus-within:text-accent"
             />
             <input
               type="text"
@@ -52,11 +52,11 @@ export default function CategoryGrid() {
               placeholder="Поиск аксессуаров…"
               className="
                 w-full
-                bg-[var(--background-card)] border border-[var(--border)]
-                hover:border-[var(--border-hover)] focus:border-[#0071e3]/50
+                bg-background-card border border-border
+                hover:border-border-hover focus:border-[#0071e3]/50
                 rounded-full
                 pl-11 pr-5 py-3
-                text-sm text-[var(--foreground)] placeholder-[var(--foreground-muted)]
+                text-sm text-foreground placeholder-foreground-muted
                 outline-none
                 transition-all duration-200
                 shadow-sm
@@ -81,8 +81,8 @@ export default function CategoryGrid() {
                   <div className="
                     w-[80px] h-[80px] sm:w-[96px] sm:h-[96px]
                     rounded-full
-                    border border-[var(--border)]
-                    bg-[var(--background-card)]
+                    border border-border
+                    bg-background-card
                     flex items-center justify-center
                     transition-all duration-300
                     group-hover:border-[#0071e3]/40
@@ -94,10 +94,10 @@ export default function CategoryGrid() {
                     <Icon
                       size={28}
                       strokeWidth={1.5}
-                      className="text-[var(--foreground-muted)] transition-colors duration-300 group-hover:text-[#0071e3]"
+                      className="text-foreground-muted transition-colors duration-300 group-hover:text-[#0071e3]"
                     />
                   </div>
-                  <span className="text-[12px] sm:text-[13px] text-[var(--foreground-secondary)] group-hover:text-[#0071e3] transition-colors duration-300 text-center leading-tight">
+                  <span className="text-[12px] sm:text-[13px] text-foreground-secondary group-hover:text-[#0071e3] transition-colors duration-300 text-center leading-tight">
                     {cat.name}
                   </span>
                 </Link>

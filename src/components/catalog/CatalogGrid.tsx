@@ -23,14 +23,14 @@ export default async function CatalogGrid({
   if (data.data.length === 0) {
     return (
       <div className="py-24 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-5">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="text-[#48484a]">
+        <div className="w-16 h-16 rounded-2xl bg-black/4 border border-border flex items-center justify-center mx-auto mb-5">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="text-foreground-muted">
             <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5"/>
             <path d="M18 18l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
         </div>
-        <p className="text-[#86868b] text-base font-medium">Ничего не найдено</p>
-        <p className="text-[#6e6e73] text-sm mt-1">Попробуйте изменить фильтры или запрос</p>
+        <p className="text-foreground-secondary text-base font-medium">Ничего не найдено</p>
+        <p className="text-foreground-muted text-sm mt-1">Попробуйте изменить фильтры или запрос</p>
       </div>
     )
   }
@@ -38,8 +38,8 @@ export default async function CatalogGrid({
   return (
     <div className="space-y-8">
       {/* Количество */}
-      <p className="text-sm text-[#6e6e73]">
-        Найдено: <span className="text-white">{data.total}</span> товаров
+      <p className="text-sm text-foreground-muted">
+        Найдено: <span className="text-foreground">{data.total}</span> товаров
       </p>
 
       {/* Сетка */}

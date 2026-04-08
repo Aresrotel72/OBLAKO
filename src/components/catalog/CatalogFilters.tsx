@@ -55,18 +55,18 @@ export default function CatalogFilters() {
     <div className="space-y-3 mb-8">
       {/* Поиск */}
       <div className="relative">
-        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6e6e73] pointer-events-none" />
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground-muted pointer-events-none" />
         <input
           type="text"
           value={searchValue}
           onChange={(e) => handleSearchChange(e.target.value)}
           placeholder="Поиск товаров..."
-          className="w-full bg-[#161617] border border-white/10 rounded-xl pl-9 pr-9 py-2.5 text-sm text-white placeholder-[#6e6e73] focus:outline-none focus:border-[#8b5cf6] transition-colors"
+          className="w-full bg-background-card border border-border rounded-xl pl-9 pr-9 py-2.5 text-sm text-foreground placeholder-foreground-muted focus:outline-none focus:border-[#0071e3]/50 transition-colors shadow-sm"
         />
         {searchValue && (
           <button
             onClick={() => handleSearchChange('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6e6e73] hover:text-white transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground-muted hover:text-foreground transition-colors"
             aria-label="Очистить поиск"
           >
             <X size={14} />
@@ -82,8 +82,8 @@ export default function CatalogFilters() {
             onClick={() => handleCategoryClick(cat)}
             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
               (cat === 'Все' && !currentCategory) || cat === currentCategory
-                ? 'bg-[#8b5cf6] text-white'
-                : 'bg-[#161617] border border-white/10 text-[#86868b] hover:border-white/25 hover:text-white'
+                ? 'bg-[#0071e3] text-white'
+                : 'bg-background-card border border-border text-foreground-secondary hover:border-[#0071e3]/30 hover:text-foreground'
             }`}
           >
             {cat}
@@ -95,7 +95,7 @@ export default function CatalogFilters() {
           className={`ml-auto px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
             currentInStock
               ? 'border-[#30d158] bg-[#30d158]/10 text-[#30d158]'
-              : 'border-white/10 bg-[#161617] text-[#86868b] hover:border-white/25 hover:text-white'
+              : 'border-border bg-background-card text-foreground-secondary hover:border-[#0071e3]/30 hover:text-foreground'
           }`}
         >
           В наличии

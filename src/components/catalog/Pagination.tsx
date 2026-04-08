@@ -43,7 +43,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       <button
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg bg-[#161617] border border-white/10 text-[#86868b] hover:text-white hover:border-white/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        className="p-2 rounded-lg bg-background-card border border-border text-foreground-secondary hover:text-foreground hover:border-[#0071e3]/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
         aria-label="Предыдущая страница"
       >
         <ChevronLeft size={16} />
@@ -51,7 +51,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
 
       {pages.map((page, i) =>
         page === null ? (
-          <span key={`gap-${i}`} className="px-2 text-[#6e6e73] text-sm">
+          <span key={`gap-${i}`} className="px-2 text-foreground-muted text-sm">
             …
           </span>
         ) : (
@@ -60,8 +60,8 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
             onClick={() => goToPage(page)}
             className={`min-w-[36px] h-9 rounded-lg text-sm font-medium transition-all ${
               page === currentPage
-                ? 'bg-[#8b5cf6] text-white'
-                : 'bg-[#161617] border border-white/10 text-[#86868b] hover:border-white/25 hover:text-white'
+                ? 'bg-[#0071e3] text-white'
+                : 'bg-background-card border border-border text-foreground-secondary hover:border-[#0071e3]/30 hover:text-foreground'
             }`}
           >
             {page}
@@ -72,7 +72,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       <button
         onClick={() => goToPage(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg bg-[#161617] border border-white/10 text-[#86868b] hover:text-white hover:border-white/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        className="p-2 rounded-lg bg-background-card border border-border text-foreground-secondary hover:text-foreground hover:border-[#0071e3]/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
         aria-label="Следующая страница"
       >
         <ChevronRight size={16} />

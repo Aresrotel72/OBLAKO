@@ -37,11 +37,20 @@
 
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-card: var(--background-card);
+  --color-background-elevated: var(--background-elevated);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-muted: var(--foreground-muted);
   --color-accent: var(--accent);
-  --color-muted: var(--foreground-muted);
+  --color-accent-hover: var(--accent-hover);
   --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  /* Fonts */
   --font-sans: var(--font-manrope), "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-syne), var(--font-manrope), sans-serif;
   --font-mono: "SF Mono", Menlo, Monaco, "Courier New", monospace;

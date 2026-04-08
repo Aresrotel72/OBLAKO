@@ -73,7 +73,7 @@ const ALL_CATEGORIES = [
 
 function IphoneMegaMenu() {
   return (
-    <div className="bg-[var(--background-card)] border border-[var(--border)] rounded-2xl shadow-xl shadow-black/8 p-5 w-[440px]">
+    <div className="bg-background-card border border-border rounded-2xl shadow-xl shadow-black/8 p-5 w-[440px]">
       <div className="grid grid-cols-2 gap-x-6 gap-y-1">
         {IPHONE_GROUPS.map((g) => (
           <div key={g.series}>
@@ -84,7 +84,7 @@ function IphoneMegaMenu() {
               <Link
                 key={m.id}
                 href={`/cases?model=${m.id}`}
-                className="block px-2 py-1.5 rounded-lg text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-all"
+                className="block px-2 py-1.5 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-foreground/5 transition-all"
               >
                 {m.label}
               </Link>
@@ -92,7 +92,7 @@ function IphoneMegaMenu() {
           </div>
         ))}
       </div>
-      <div className="mt-4 pt-4 border-t border-[var(--border)]">
+      <div className="mt-4 pt-4 border-t border-border">
         <Link
           href="/cases"
           className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-[#0071e3] hover:bg-[#0071e3]/8 transition-all"
@@ -109,23 +109,23 @@ function IphoneMegaMenu() {
 
 function CatalogMegaMenu() {
   return (
-    <div className="bg-[var(--background-card)] border border-[var(--border)] rounded-2xl shadow-xl shadow-black/8 p-5 w-[480px]">
+    <div className="bg-background-card border border-border rounded-2xl shadow-xl shadow-black/8 p-5 w-[480px]">
       <div className="grid grid-cols-3 gap-1.5">
         {ALL_CATEGORIES.map(({ icon: Icon, label, href, color }) => (
           <Link
             key={label}
             href={href}
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-all group"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-foreground-secondary hover:text-foreground hover:bg-foreground/5 transition-all group"
           >
             <Icon size={14} style={{ color }} className="shrink-0 group-hover:scale-110 transition-transform" />
             <span className="leading-tight text-xs">{label}</span>
           </Link>
         ))}
       </div>
-      <div className="mt-4 pt-4 border-t border-[var(--border)]">
+      <div className="mt-4 pt-4 border-t border-border">
         <Link
           href="/catalog"
-          className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-all"
+          className="flex items-center justify-between px-2 py-2 rounded-lg text-sm font-semibold text-foreground-secondary hover:text-foreground hover:bg-foreground/5 transition-all"
         >
           Весь каталог
           <span>→</span>
@@ -153,7 +153,7 @@ function NavItem({
       <Link
         href={href}
         className={`relative flex items-center gap-1 text-xs font-semibold uppercase tracking-widest transition-colors duration-150 py-1 ${
-          isActive ? 'text-[var(--foreground)]' : 'text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
+          isActive ? 'text-foreground' : 'text-foreground-muted hover:text-foreground'
         }`}
       >
         {label}
@@ -212,7 +212,7 @@ function AccountButton({ user }: { user: { name: string } | null }) {
   return (
     <Link
       href="/account"
-      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border-hover)] hover:border-[#0071e3]/45 hover:bg-[#0071e3]/6 transition-all text-xs font-semibold text-[var(--foreground-secondary)] hover:text-[#0071e3]"
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border-hover hover:border-[#0071e3]/45 hover:bg-[#0071e3]/6 transition-all text-xs font-semibold text-foreground-secondary hover:text-[#0071e3]"
       aria-label="Войти"
     >
       <LogIn size={14} />
@@ -294,7 +294,7 @@ export default function Header() {
 
               {/* Mobile burger */}
               <button
-                className="lg:hidden p-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors rounded-full hover:bg-[var(--foreground)]/5"
+                className="lg:hidden p-2 text-foreground-muted hover:text-foreground transition-colors rounded-full hover:bg-foreground/5"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Открыть меню"
               >

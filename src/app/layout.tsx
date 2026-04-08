@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer"
 import AuthProvider from "@/components/auth/AuthProvider"
 import SmoothScroll from "@/components/providers/SmoothScroll"
 import ScrollProgress from "@/components/ui/ScrollProgress"
-import CustomCursor from "@/components/ui/CustomCursor"
+// import CustomCursor from "@/components/ui/CustomCursor"
 
 const syne = Syne({
   variable: "--font-syne",
@@ -45,10 +45,10 @@ export default function RootLayout({
       lang="ru"
       className={`${syne.variable} ${manrope.variable} ${nunito.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+      <body className="min-h-full flex flex-col bg-background text-foreground">
         <AuthProvider>
             <SmoothScroll>
-              <CustomCursor />
+              {/* <CustomCursor /> */}
               <ScrollProgress />
               <Header />
               <main className="flex-1">{children}</main>

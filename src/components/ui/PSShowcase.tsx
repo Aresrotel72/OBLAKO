@@ -123,8 +123,8 @@ export default function PSShowcase({ products }: Props) {
         >
           {/* OBLAKO mini icon */}
           <div className="flex justify-center mb-6">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white/60">
+            <div className="w-10 h-10 rounded-xl bg-black/5 border border-border flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-foreground-muted">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
               </svg>
             </div>
@@ -137,14 +137,14 @@ export default function PSShowcase({ products }: Props) {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`relative text-sm font-medium pb-2 transition-colors duration-300 ${
-                  activeTab === tab ? 'text-white' : 'text-[#6e6e73] hover:text-[#86868b]'
+                  activeTab === tab ? 'text-foreground' : 'text-foreground-muted hover:text-foreground-secondary'
                 }`}
               >
                 {tab}
                 {activeTab === tab && (
                   <motion.div
                     layoutId="ps-tab-underline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-white rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-full"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -153,7 +153,7 @@ export default function PSShowcase({ products }: Props) {
           </nav>
 
           {/* Title */}
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground tracking-tight">
             Чехлы для iPhone
           </h2>
         </motion.div>
@@ -163,20 +163,20 @@ export default function PSShowcase({ products }: Props) {
           {/* Scroll buttons */}
           <button
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all -translate-x-1/2 backdrop-blur-sm hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-background-card border border-border flex items-center justify-center text-foreground-muted hover:text-foreground hover:border-[#0071e3]/30 transition-all -translate-x-1/2 shadow-sm hidden md:flex"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all translate-x-1/2 backdrop-blur-sm hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-background-card border border-border flex items-center justify-center text-foreground-muted hover:text-foreground hover:border-[#0071e3]/30 transition-all translate-x-1/2 shadow-sm hidden md:flex"
           >
             <ChevronRight size={18} />
           </button>
 
           {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           {/* Products scroll container */}
           <div
@@ -202,8 +202,8 @@ export default function PSShowcase({ products }: Props) {
                       onClick={() => setSelectedIdx(i)}
                       className={`group relative flex flex-col items-center w-[180px] sm:w-[200px] py-8 px-4 rounded-3xl transition-all duration-400 ${
                         isSelected
-                          ? 'bg-white/[0.06] border border-white/15 shadow-lg shadow-white/[0.03]'
-                          : 'bg-transparent border border-transparent hover:bg-white/[0.03]'
+                          ? 'bg-black/[0.04] border border-black/10 shadow-lg shadow-black/[0.04]'
+                          : 'bg-transparent border border-transparent hover:bg-black/[0.02]'
                       }`}
                     >
                       {/* Case SVG */}
@@ -218,8 +218,8 @@ export default function PSShowcase({ products }: Props) {
                             key={ci}
                             className={`w-3 h-3 rounded-full border transition-all duration-200 ${
                               ci === (i % CASE_COLORS.length)
-                                ? 'border-white/50 scale-125'
-                                : 'border-white/10 hover:border-white/30'
+                                ? 'border-black/40 scale-125'
+                                : 'border-black/10 hover:border-black/25'
                             }`}
                             style={{ background: c.dot }}
                           />
@@ -227,12 +227,12 @@ export default function PSShowcase({ products }: Props) {
                       </div>
 
                       {/* Name */}
-                      <p className="text-xs text-[#86868b] text-center leading-snug line-clamp-2 mb-1 min-h-[32px]">
+                      <p className="text-xs text-foreground-muted text-center leading-snug line-clamp-2 mb-1 min-h-[32px]">
                         {product.name.replace(/iPhone \d+\w?\s*(Pro Max|Pro|Air)?/i, '').trim() || product.name}
                       </p>
 
                       {/* Price */}
-                      <p className={`text-sm font-bold transition-colors ${isSelected ? 'text-white' : 'text-white/60'}`}>
+                      <p className={`text-sm font-bold transition-colors ${isSelected ? 'text-foreground' : 'text-foreground-muted'}`}>
                         {formatPrice(product.sellingPrice)}
                       </p>
 
@@ -240,7 +240,7 @@ export default function PSShowcase({ products }: Props) {
                       {isSelected && (
                         <motion.div
                           layoutId="ps-selected"
-                          className="absolute -bottom-1 w-8 h-1 rounded-full bg-white/30"
+                          className="absolute -bottom-1 w-8 h-1 rounded-full bg-[#0071e3]/40"
                           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                         />
                       )}
@@ -261,7 +261,7 @@ export default function PSShowcase({ products }: Props) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4, ease }}
-              className="mt-4 rounded-3xl border border-white/8 bg-white/[0.02] backdrop-blur-sm p-8 sm:p-10"
+              className="mt-4 rounded-3xl border border-border bg-background-card shadow-sm p-8 sm:p-10"
             >
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                 <div className="space-y-2">
@@ -279,16 +279,16 @@ export default function PSShowcase({ products }: Props) {
                       </span>
                     )}
                     {selected.article && (
-                      <span className="text-xs text-[#6e6e73]">Арт. {selected.article}</span>
+                      <span className="text-xs text-foreground-muted">Арт. {selected.article}</span>
                     )}
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
                     {selected.name}
                   </h3>
 
                   {selected.description && (
-                    <p className="text-sm text-[#86868b] max-w-lg">
+                    <p className="text-sm text-foreground-muted max-w-lg">
                       {selected.description}
                     </p>
                   )}
@@ -296,16 +296,15 @@ export default function PSShowcase({ products }: Props) {
 
                 <div className="flex items-center gap-4">
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-white">
+                    <div className="text-3xl font-bold text-foreground">
                       {formatPrice(selected.sellingPrice)}
                     </div>
-                    <div className="text-xs text-[#6e6e73] mt-0.5">Бронь на 24 часа</div>
+                    <div className="text-xs text-foreground-muted mt-0.5">Бронь на 24 часа</div>
                   </div>
 
                   <Link
                     href={`/catalog/${selected.id}`}
-                    data-cursor="cta"
-                    className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white text-black text-sm font-bold hover:bg-white/90 active:scale-95 transition-all"
+                    className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#0071e3] text-white text-sm font-bold hover:bg-[#0077ed] active:scale-95 transition-all"
                   >
                     Подробнее <ArrowRight size={14} />
                   </Link>
@@ -325,7 +324,7 @@ export default function PSShowcase({ products }: Props) {
         >
           <Link
             href="/cases"
-            className="inline-flex items-center gap-1.5 text-sm text-[#86868b] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-[#0071e3] hover:underline transition-colors"
           >
             Смотреть все чехлы <ArrowRight size={14} />
           </Link>

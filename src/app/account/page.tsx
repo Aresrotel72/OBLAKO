@@ -41,14 +41,14 @@ export default async function AccountPage() {
     <div className="max-w-2xl mx-auto px-4 py-12 space-y-10">
 
       {/* Профиль */}
-      <div className="rounded-2xl bg-white/4 border border-white/10 p-6">
+      <div className="rounded-2xl bg-background-card border border-border p-6 shadow-sm">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-full bg-[#8b5cf6]/15 border border-[#8b5cf6]/20 flex items-center justify-center">
-            <User size={26} className="text-[#8b5cf6]" />
+          <div className="w-14 h-14 rounded-full bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center">
+            <User size={26} className="text-[#0071e3]" />
           </div>
           <div className="space-y-0.5">
-            <p className="text-lg font-semibold text-white">{session.name}</p>
-            <div className="flex items-center gap-1.5 text-sm text-[#86868b]">
+            <p className="text-lg font-semibold text-foreground">{session.name}</p>
+            <div className="flex items-center gap-1.5 text-sm text-foreground-muted">
               <Phone size={13} />
               <span>{session.phone}</span>
             </div>
@@ -58,22 +58,22 @@ export default async function AccountPage() {
 
       {/* Активные бронирования */}
       <section className="space-y-4">
-        <h2 className="text-base font-semibold text-white flex items-center gap-2">
-          <ShoppingBag size={16} className="text-[#8b5cf6]" />
+        <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+          <ShoppingBag size={16} className="text-[#0071e3]" />
           Активные бронирования
           {active.length > 0 && (
-            <span className="ml-1 px-2 py-0.5 rounded-full bg-[#8b5cf6]/15 text-[#8b5cf6] text-xs font-medium">
+            <span className="ml-1 px-2 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3] text-xs font-medium">
               {active.length}
             </span>
           )}
         </h2>
 
         {active.length === 0 ? (
-          <div className="rounded-2xl border border-white/8 bg-white/2 px-6 py-10 text-center">
-            <p className="text-sm text-[#6e6e73]">Нет активных броней</p>
+          <div className="rounded-2xl border border-border bg-background-card px-6 py-10 text-center">
+            <p className="text-sm text-foreground-muted">Нет активных броней</p>
             <a
               href="/catalog"
-              className="mt-3 inline-block text-sm text-[#8b5cf6] hover:underline"
+              className="mt-3 inline-block text-sm text-[#0071e3] hover:underline"
             >
               Перейти в каталог
             </a>
@@ -90,7 +90,7 @@ export default async function AccountPage() {
       {/* История */}
       {history.length > 0 && (
         <section className="space-y-4">
-          <h2 className="text-base font-semibold text-[#6e6e73]">История</h2>
+          <h2 className="text-base font-semibold text-foreground-muted">История</h2>
           <div className="space-y-3">
             {history.map((r) => (
               <ReservationCard key={r.id} r={{ ...r, productPrice: Number(r.productPrice) }} />
@@ -103,7 +103,7 @@ export default async function AccountPage() {
       <form action={logout}>
         <button
           type="submit"
-          className="flex items-center gap-2 text-sm text-[#6e6e73] hover:text-white transition-colors"
+          className="flex items-center gap-2 text-sm text-foreground-muted hover:text-foreground transition-colors"
         >
           <LogOut size={15} />
           Выйти из аккаунта

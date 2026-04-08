@@ -73,7 +73,7 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden transition-opacity duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
@@ -82,7 +82,7 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
       {/* Panel */}
       <div
         className={`fixed top-0 right-0 h-full w-80 z-50 lg:hidden flex flex-col
-          bg-[#111113] border-l border-white/10 overflow-y-auto
+          bg-background border-l border-border overflow-y-auto
           transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
@@ -90,11 +90,11 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
         aria-label="Меню"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 h-14 border-b border-white/8 shrink-0 sticky top-0 bg-[#111113]/95 backdrop-blur-xl z-10">
-          <span className="text-base font-bold tracking-[0.18em] text-white">OBLAKO</span>
+        <div className="flex items-center justify-between px-5 h-14 border-b border-border shrink-0 sticky top-0 bg-background/95 backdrop-blur-xl z-10">
+          <span className="text-base font-bold tracking-[0.18em] text-foreground">OBLAKO</span>
           <button
             onClick={onClose}
-            className="p-2 text-[#86868b] hover:text-white transition-colors rounded-full hover:bg-white/5"
+            className="p-2 text-foreground-muted hover:text-foreground transition-colors rounded-full hover:bg-black/5"
           >
             <X size={18} />
           </button>
@@ -104,13 +104,13 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
         <Link
           href="/sale"
           onClick={onClose}
-          className="mx-4 mt-4 flex items-center justify-between px-4 py-3 rounded-2xl bg-[#ff453a]/10 border border-[#ff453a]/25"
+          className="mx-4 mt-4 flex items-center justify-between px-4 py-3 rounded-2xl bg-[#ff453a]/8 border border-[#ff453a]/20"
         >
           <div className="flex items-center gap-2">
             <Tag size={15} className="text-[#ff453a]" />
             <span className="text-sm font-bold text-[#ff453a]">Распродажа Android</span>
           </div>
-          <span className="text-xs font-bold text-[#ff453a] bg-[#ff453a]/15 px-2 py-0.5 rounded-full">
+          <span className="text-xs font-bold text-[#ff453a] bg-[#ff453a]/12 px-2 py-0.5 rounded-full">
             SALE
           </span>
         </Link>
@@ -119,7 +119,7 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
         <nav className="flex flex-col px-4 py-4 gap-6">
           {SECTIONS.map((section) => (
             <div key={section.title}>
-              <p className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-widest px-2 mb-2">
+              <p className="text-[10px] font-semibold text-foreground-muted uppercase tracking-widest px-2 mb-2">
                 {section.title}
               </p>
               <div className="space-y-0.5">
@@ -132,8 +132,8 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
                       onClick={onClose}
                       className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-all ${
                         isActive
-                          ? 'bg-white/8 text-white font-medium'
-                          : 'text-[#86868b] hover:text-white hover:bg-white/5'
+                          ? 'bg-[#0071e3]/8 text-foreground font-medium'
+                          : 'text-foreground-secondary hover:text-foreground hover:bg-black/4'
                       }`}
                       style={accent ? { color: accent } : undefined}
                     >
@@ -151,16 +151,16 @@ export default function MobileNav({ isOpen, onClose, pathname }: MobileNavProps)
         </nav>
 
         {/* Footer */}
-        <div className="px-5 py-5 border-t border-white/8 mt-auto shrink-0">
+        <div className="px-5 py-5 border-t border-border mt-auto shrink-0">
           <Link
             href="/account"
             onClick={onClose}
-            className="flex items-center gap-2.5 text-sm text-[#86868b] hover:text-white transition-colors px-2"
+            className="flex items-center gap-2.5 text-sm text-foreground-secondary hover:text-foreground transition-colors px-2"
           >
             <User size={16} />
             Личный кабинет
           </Link>
-          <p className="text-[11px] text-[#6e6e73] mt-4 px-2 leading-relaxed">
+          <p className="text-[11px] text-foreground-muted mt-4 px-2 leading-relaxed">
             г. Полоцк, ул. Богдановича 14<br />
             ТЦ Green · Каждый день 10:00–21:00
           </p>

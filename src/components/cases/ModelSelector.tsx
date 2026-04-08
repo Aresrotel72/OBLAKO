@@ -66,10 +66,10 @@ export default function ModelSelector() {
       <div className="max-w-5xl mx-auto">
         {/* Заголовок */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-3">
             Выбери свою модель
           </h2>
-          <p className="text-[#86868b]">
+          <p className="text-foreground-muted">
             Показываем только чехлы, которые подходят именно к твоему iPhone
           </p>
         </div>
@@ -79,11 +79,11 @@ export default function ModelSelector() {
           {MODEL_GROUPS.map((group) => (
             <div key={group.series}>
               <div className="flex items-center gap-2 mb-3 px-1">
-                <p className="text-xs font-medium text-[#6e6e73] uppercase tracking-widest">
+                <p className="text-xs font-medium text-foreground-muted uppercase tracking-widest">
                   {group.series}
                 </p>
                 {'badge' in group && group.badge && (
-                  <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#8b5cf6]/20 text-[#8b5cf6] tracking-wide">
+                  <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#0071e3]/12 text-[#0071e3] tracking-wide">
                     {group.badge}
                   </span>
                 )}
@@ -97,15 +97,15 @@ export default function ModelSelector() {
                       border text-sm font-medium text-left transition-all duration-200
                       ${
                         selected === id
-                          ? 'border-[#8b5cf6] bg-[#8b5cf6]/10 text-white'
-                          : 'border-white/10 bg-[#161617] text-[#86868b] hover:border-white/25 hover:text-white hover:bg-white/5'
+                          ? 'border-[#0071e3] bg-[#0071e3]/8 text-foreground'
+                          : 'border-border bg-background-card text-foreground-secondary hover:border-[#0071e3]/30 hover:text-foreground hover:bg-[#0071e3]/4'
                       }`}
                   >
                     <span>{label}</span>
                     <ChevronRight
                       size={14}
                       className={`shrink-0 transition-transform duration-200 ${
-                        selected === id ? 'text-[#8b5cf6]' : 'text-[#6e6e73] group-hover:translate-x-0.5'
+                        selected === id ? 'text-[#0071e3]' : 'text-foreground-muted group-hover:translate-x-0.5'
                       }`}
                     />
                   </button>

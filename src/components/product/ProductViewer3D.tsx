@@ -218,19 +218,19 @@ export default function ProductViewer3D({ productName }: Props) {
   }, [])
 
   return (
-    <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-white/8 cursor-grab active:cursor-grabbing select-none">
+    <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-border cursor-grab active:cursor-grabbing select-none">
       <div ref={mountRef} className="w-full h-full" style={{ touchAction: 'none' }} />
 
       {/* Бейдж */}
-      <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#8b5cf6] animate-pulse" />
-        <span className="text-[10px] font-medium text-white tracking-wide">3D</span>
+      <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-black/8 shadow-sm">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] animate-pulse" />
+        <span className="text-[10px] font-medium text-foreground tracking-wide">3D</span>
       </div>
 
       {/* Подсказка */}
       {!interacted && (
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 pointer-events-none whitespace-nowrap">
-          <span className="text-xs text-[#86868b]">↔ Перетащи для поворота</span>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-black/8 shadow-sm pointer-events-none whitespace-nowrap">
+          <span className="text-xs text-foreground-muted">↔ Перетащи для поворота</span>
         </div>
       )}
     </div>

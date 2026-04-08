@@ -26,27 +26,27 @@ export default async function PopularProducts() {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-2">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-2">
               Популярные товары
             </h2>
-            <p className="text-[#86868b]">Актуальный остаток — обновляется в реальном времени</p>
+            <p className="text-foreground-muted">Актуальный остаток — обновляется в реальном времени</p>
           </div>
           <Link
             href="/catalog"
-            className="hidden sm:flex items-center gap-1 text-sm text-[#8b5cf6] hover:underline"
+            className="hidden sm:flex items-center gap-1 text-sm text-[#0071e3] hover:underline"
           >
             Все товары <ArrowRight size={14} />
           </Link>
         </div>
 
         {error && (
-          <div className="rounded-2xl border border-white/10 bg-[#161617] p-8 text-center text-[#86868b]">
+          <div className="rounded-2xl border border-border bg-background-card p-8 text-center text-foreground-muted">
             Не удалось загрузить товары. Попробуйте позже.
           </div>
         )}
 
         {!error && products.length === 0 && (
-          <div className="rounded-2xl border border-white/10 bg-[#161617] p-8 text-center text-[#86868b]">
+          <div className="rounded-2xl border border-border bg-background-card p-8 text-center text-foreground-muted">
             Товары в наличии пока отсутствуют.
           </div>
         )}
@@ -62,7 +62,7 @@ export default async function PopularProducts() {
         <div className="mt-8 text-center sm:hidden">
           <Link
             href="/catalog"
-            className="text-sm text-[#8b5cf6] hover:underline"
+            className="text-sm text-[#0071e3] hover:underline"
           >
             Смотреть все товары →
           </Link>

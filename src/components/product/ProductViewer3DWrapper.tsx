@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 const ProductViewer3D = dynamic(() => import('./ProductViewer3D'), {
   ssr: false,
   loading: () => (
-    <div className="w-full aspect-square rounded-2xl bg-[#0d0d0f] border border-white/8 skeleton" />
+    <div className="w-full aspect-square rounded-2xl bg-background-secondary border border-border skeleton" />
   ),
 })
 

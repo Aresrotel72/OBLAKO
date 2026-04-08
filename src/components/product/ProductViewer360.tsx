@@ -94,7 +94,7 @@ export default function ProductViewer360({ images, productName, autoPlay = true 
       {/* Основной контейнер */}
       <div
         ref={containerRef}
-        className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#0d0d0f] border border-white/8 cursor-grab active:cursor-grabbing"
+        className="relative aspect-square w-full rounded-2xl overflow-hidden bg-background-secondary border border-border cursor-grab active:cursor-grabbing"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
@@ -128,9 +128,9 @@ export default function ProductViewer360({ images, productName, autoPlay = true 
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
             {/* Анимированное кольцо */}
             <div className="relative w-32 h-32">
-              <div className="absolute inset-0 rounded-full border-2 border-white/5" />
+              <div className="absolute inset-0 rounded-full border-2 border-black/5" />
               <div
-                className="absolute inset-0 rounded-full border-2 border-t-[#8b5cf6] border-r-[#8b5cf6]/30 border-b-transparent border-l-transparent"
+                className="absolute inset-0 rounded-full border-2 border-t-[#0071e3] border-r-[#0071e3]/30 border-b-transparent border-l-transparent"
                 style={{
                   transform: `rotate(${frame * (360 / total)}deg)`,
                   transition: 'transform 60ms linear',
@@ -140,20 +140,20 @@ export default function ProductViewer360({ images, productName, autoPlay = true 
                 <span className="text-5xl">📦</span>
               </div>
             </div>
-            <p className="text-xs text-[#6e6e73]">Фото появятся скоро</p>
+            <p className="text-xs text-foreground-muted">Фото появятся скоро</p>
           </div>
         )}
 
         {/* 360° бейдж */}
-        <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
-          <RotateCcw size={10} className="text-[#8b5cf6]" />
-          <span className="text-[10px] font-medium text-white tracking-wide">360°</span>
+        <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-black/8 shadow-sm">
+          <RotateCcw size={10} className="text-[#0071e3]" />
+          <span className="text-[10px] font-medium text-foreground tracking-wide">360°</span>
         </div>
 
         {/* Подсказка (исчезает после взаимодействия) */}
         {!interacted && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 pointer-events-none">
-            <span className="text-xs text-[#86868b]">↔ Перетащи для поворота</span>
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-black/8 shadow-sm pointer-events-none">
+            <span className="text-xs text-foreground-muted">↔ Перетащи для поворота</span>
           </div>
         )}
       </div>

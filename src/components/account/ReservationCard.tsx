@@ -22,11 +22,11 @@ interface ReservationItem {
 
 const STATUS_CONFIG: Record<ReservationStatus, { label: string; dot: string; text: string }> = {
   PENDING:   { label: 'Ожидает подтверждения', dot: 'bg-[#ffd60a]', text: 'text-[#ffd60a]' },
-  CONFIRMED: { label: 'Подтверждена',          dot: 'bg-[#8b5cf6]', text: 'text-[#8b5cf6]' },
+  CONFIRMED: { label: 'Подтверждена',          dot: 'bg-[#0071e3]', text: 'text-[#0071e3]' },
   READY:     { label: 'Готова к выдаче',       dot: 'bg-[#30d158]', text: 'text-[#30d158]' },
-  COMPLETED: { label: 'Выкуплена',             dot: 'bg-[#6e6e73]', text: 'text-[#6e6e73]' },
-  CANCELLED: { label: 'Отменена',              dot: 'bg-[#6e6e73]', text: 'text-[#6e6e73]' },
-  EXPIRED:   { label: 'Истекла',               dot: 'bg-[#6e6e73]', text: 'text-[#6e6e73]' },
+  COMPLETED: { label: 'Выкуплена',             dot: 'bg-foreground-muted', text: 'text-foreground-muted' },
+  CANCELLED: { label: 'Отменена',              dot: 'bg-foreground-muted', text: 'text-foreground-muted' },
+  EXPIRED:   { label: 'Истекла',               dot: 'bg-foreground-muted', text: 'text-foreground-muted' },
 }
 
 const initialState: CancelState = {}
@@ -35,7 +35,7 @@ function CancelButton({ reservationId }: { reservationId: string }) {
   const [state, formAction, isPending] = useActionState(cancelReservation, initialState)
 
   if (state.success) {
-    return <span className="text-xs text-[#6e6e73]">Отменена</span>
+    return <span className="text-xs text-foreground-muted">Отменена</span>
   }
 
   return (
@@ -68,10 +68,10 @@ export default function ReservationCard({ r }: { r: ReservationItem }) {
   const active = isActive(r.status)
 
   return (
-    <div className={`rounded-2xl border p-5 space-y-3 transition-opacity ${active ? 'bg-white/4 border-white/10' : 'bg-white/2 border-white/6 opacity-60'}`}>
+    <div className={`rounded-2xl border p-5 space-y-3 transition-opacity ${active ? 'bg-background-card border-border shadow-sm' : 'bg-background-secondary border-border opacity-60'}`}>
       {/* Заголовок */}
       <div className="flex items-start justify-between gap-3">
-        <p className={`text-sm font-medium leading-snug ${active ? 'text-white' : 'text-[#86868b]'}`}>
+        <p className={`text-sm font-medium leading-snug ${active ? 'text-foreground' : 'text-foreground-muted'}`}>
           {r.productName}
         </p>
         <div className="flex items-center gap-1.5 shrink-0">
@@ -81,7 +81,7 @@ export default function ReservationCard({ r }: { r: ReservationItem }) {
       </div>
 
       {/* Детали */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6e6e73]">
+      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-foreground-muted">
         <span>{formatPrice(r.productPrice)} · {r.quantity} шт.</span>
         <span>Оформлена {formatDate(r.createdAt)}</span>
         {active && r.status !== 'READY' && (
@@ -91,12 +91,12 @@ export default function ReservationCard({ r }: { r: ReservationItem }) {
 
       {/* Заметка */}
       {r.notes && (
-        <p className="text-xs text-[#6e6e73] italic">«{r.notes}»</p>
+        <p className="text-xs text-foreground-muted italic">«{r.notes}»</p>
       )}
 
       {/* Отмена */}
       {canCancel(r.status) && (
-        <div className="pt-1 border-t border-white/6">
+        <div className="pt-1 border-t border-border">
           <CancelButton reservationId={r.id} />
         </div>
       )}

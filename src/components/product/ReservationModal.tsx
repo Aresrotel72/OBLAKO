@@ -42,17 +42,17 @@ export default function ReservationModal({ product, user, onClose }: Props) {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm px-4 pb-4 sm:pb-0"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30 backdrop-blur-sm px-4 pb-4 sm:pb-0"
       onClick={(e) => { if (e.target === overlayRef.current) onClose() }}
     >
-      <div className="w-full max-w-md bg-[#161617] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="w-full max-w-md bg-background-card border border-border rounded-2xl overflow-hidden shadow-2xl">
 
         {/* Заголовок */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
-          <h2 className="text-base font-semibold text-white">Забронировать товар</h2>
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
+          <h2 className="text-base font-semibold text-foreground">Забронировать товар</h2>
           <button
             onClick={onClose}
-            className="w-7 h-7 flex items-center justify-center rounded-full bg-white/8 hover:bg-white/15 transition-colors text-[#86868b] hover:text-white"
+            className="w-7 h-7 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors text-foreground-muted hover:text-foreground"
             aria-label="Закрыть"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -70,15 +70,15 @@ export default function ReservationModal({ product, user, onClose }: Props) {
               </svg>
             </div>
             <div>
-              <p className="text-white font-semibold text-lg mb-1">Бронь оформлена!</p>
-              <p className="text-sm text-[#86868b]">
+              <p className="text-foreground font-semibold text-lg mb-1">Бронь оформлена!</p>
+              <p className="text-sm text-foreground-muted">
                 Мы позвоним вам в течение часа для подтверждения.
                 Бронь действует 24 часа.
               </p>
             </div>
             <button
               onClick={onClose}
-              className="mt-2 px-6 py-2.5 rounded-xl bg-[#8b5cf6] text-white text-sm font-semibold hover:bg-[#7c3aed] transition-colors"
+              className="mt-2 px-6 py-2.5 rounded-xl bg-[#0071e3] text-white text-sm font-semibold hover:bg-[#0077ed] transition-colors"
             >
               Отлично
             </button>
@@ -92,21 +92,21 @@ export default function ReservationModal({ product, user, onClose }: Props) {
             <input type="hidden" name="productPrice" value={product.sellingPrice} />
 
             {/* Товар */}
-            <div className="p-3 rounded-xl bg-white/4 border border-white/8">
-              <p className="text-xs text-[#6e6e73] mb-0.5">Товар</p>
-              <p className="text-sm text-white font-medium line-clamp-2">{product.name}</p>
+            <div className="p-3 rounded-xl bg-background-secondary border border-border">
+              <p className="text-xs text-foreground-muted mb-0.5">Товар</p>
+              <p className="text-sm text-foreground font-medium line-clamp-2">{product.name}</p>
             </div>
 
             {/* Количество */}
             <div>
-              <label className="block text-xs text-[#86868b] mb-1.5">
-                Количество <span className="text-[#6e6e73]">(до {maxQty} {product.unit})</span>
+              <label className="block text-xs text-foreground-secondary mb-1.5">
+                Количество <span className="text-foreground-muted">(до {maxQty} {product.unit})</span>
               </label>
               <div className="flex items-center gap-3">
                 {[1, 2, 3, 4, 5].filter(n => n <= maxQty).map((n) => (
                   <label key={n} className="cursor-pointer">
                     <input type="radio" name="quantity" value={n} defaultChecked={n === 1} className="sr-only peer" />
-                    <span className="block w-10 h-10 rounded-xl border border-white/10 bg-white/4 text-sm text-[#86868b] font-medium text-center leading-10 peer-checked:border-[#8b5cf6] peer-checked:bg-[#8b5cf6]/15 peer-checked:text-white transition-colors select-none">
+                    <span className="block w-10 h-10 rounded-xl border border-border bg-background-secondary text-sm text-foreground-secondary font-medium text-center leading-10 peer-checked:border-[#0071e3] peer-checked:bg-[#0071e3]/10 peer-checked:text-[#0071e3] transition-colors select-none">
                       {n}
                     </span>
                   </label>
@@ -119,7 +119,7 @@ export default function ReservationModal({ product, user, onClose }: Props) {
 
             {/* Имя */}
             <div>
-              <label className="block text-xs text-[#86868b] mb-1.5" htmlFor="res-name">
+              <label className="block text-xs text-foreground-secondary mb-1.5" htmlFor="res-name">
                 Ваше имя
               </label>
               <input
@@ -128,7 +128,7 @@ export default function ReservationModal({ product, user, onClose }: Props) {
                 defaultValue={user.name}
                 placeholder="Иван Иванов"
                 autoComplete="name"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/4 border border-white/10 text-sm text-white placeholder:text-[#6e6e73] focus:outline-none focus:border-[#8b5cf6] transition-colors"
+                className="w-full px-4 py-2.5 rounded-xl bg-background-card border border-border text-sm text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-[#0071e3]/50 transition-colors"
               />
               {state.errors?.contactName && (
                 <p className="mt-1 text-xs text-[#ff453a]">{state.errors.contactName[0]}</p>
@@ -137,7 +137,7 @@ export default function ReservationModal({ product, user, onClose }: Props) {
 
             {/* Телефон */}
             <div>
-              <label className="block text-xs text-[#86868b] mb-1.5" htmlFor="res-phone">
+              <label className="block text-xs text-foreground-secondary mb-1.5" htmlFor="res-phone">
                 Телефон для связи
               </label>
               <input
@@ -147,7 +147,7 @@ export default function ReservationModal({ product, user, onClose }: Props) {
                 defaultValue={user.phone}
                 placeholder="+375291234567"
                 autoComplete="tel"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/4 border border-white/10 text-sm text-white placeholder:text-[#6e6e73] focus:outline-none focus:border-[#8b5cf6] transition-colors"
+                className="w-full px-4 py-2.5 rounded-xl bg-background-card border border-border text-sm text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-[#0071e3]/50 transition-colors"
               />
               {state.errors?.contactPhone && (
                 <p className="mt-1 text-xs text-[#ff453a]">{state.errors.contactPhone[0]}</p>
@@ -156,15 +156,15 @@ export default function ReservationModal({ product, user, onClose }: Props) {
 
             {/* Заметки */}
             <div>
-              <label className="block text-xs text-[#86868b] mb-1.5" htmlFor="res-notes">
-                Комментарий <span className="text-[#6e6e73]">(необязательно)</span>
+              <label className="block text-xs text-foreground-secondary mb-1.5" htmlFor="res-notes">
+                Комментарий <span className="text-foreground-muted">(необязательно)</span>
               </label>
               <textarea
                 id="res-notes"
                 name="notes"
                 rows={2}
                 placeholder="Например: позвоните после 18:00"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/4 border border-white/10 text-sm text-white placeholder:text-[#6e6e73] focus:outline-none focus:border-[#8b5cf6] transition-colors resize-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-background-card border border-border text-sm text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-[#0071e3]/50 transition-colors resize-none"
               />
             </div>
 
@@ -177,12 +177,12 @@ export default function ReservationModal({ product, user, onClose }: Props) {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full py-3 rounded-xl bg-[#8b5cf6] text-white text-sm font-semibold hover:bg-[#7c3aed] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full py-3 rounded-xl bg-[#0071e3] text-white text-sm font-semibold hover:bg-[#0077ed] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isPending ? 'Оформляем...' : 'Подтвердить бронь'}
             </button>
 
-            <p className="text-xs text-center text-[#6e6e73]">
+            <p className="text-xs text-center text-foreground-muted">
               Бронь действует 24 часа · самовывоз из магазина
             </p>
           </form>

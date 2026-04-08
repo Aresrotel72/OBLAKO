@@ -18,17 +18,7 @@ const stockConfig: Record<CaProduct['stockStatus'], { label: string; dot: string
   out: { label: 'Нет',       dot: 'bg-[#6e6e73]', text: 'text-[#6e6e73]' },
 }
 
-// Neon glow color cycle
-const NEON_COLORS = [
-  { glow: 'rgba(139, 92, 246, 0.45)', border: 'rgba(139, 92, 246, 0.5)' },   // violet
-  { glow: 'rgba(6, 182, 212, 0.45)',  border: 'rgba(6, 182, 212, 0.5)' },    // cyan
-  { glow: 'rgba(244, 63, 94, 0.4)',   border: 'rgba(244, 63, 94, 0.45)' },   // rose
-  { glow: 'rgba(34, 197, 94, 0.4)',   border: 'rgba(34, 197, 94, 0.45)' },   // green
-  { glow: 'rgba(59, 130, 246, 0.45)', border: 'rgba(59, 130, 246, 0.5)' },   // blue
-  { glow: 'rgba(245, 158, 11, 0.4)',  border: 'rgba(245, 158, 11, 0.45)' },  // amber
-]
-
-// Feature annotations — появляются при hover (как lovi.care / augen.pro)
+// Feature annotations — появляются при hover
 function getFeatures(name: string): { label: string; value: string; icon: React.ElementType; position: string }[] {
   const n = name.toLowerCase()
   if (/кожан|leather/.test(n)) return [
@@ -55,12 +45,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const stock = stockConfig[product.stockStatus]
   const [isHovered, setIsHovered] = useState(false)
   const features = getFeatures(product.name)
-  const neonIdx = useRef(0)
-  const [neon, setNeon] = useState(NEON_COLORS[0]!)
 
   const handleHoverStart = useCallback(() => {
-    neonIdx.current = (neonIdx.current + 1) % NEON_COLORS.length
-    setNeon(NEON_COLORS[neonIdx.current]!)
     setIsHovered(true)
   }, [])
 
@@ -73,27 +59,17 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       whileHover={{ y: -8, scale: 1.02 }}
       onHoverStart={handleHoverStart}
       onHoverEnd={() => setIsHovered(false)}
-      data-cursor="card"
-      className="group relative bg-[#0a0a0a] border border-white/8 rounded-3xl overflow-visible cursor-pointer flex flex-col"
+      className="group relative bg-background-card border border-border rounded-3xl overflow-visible cursor-pointer flex flex-col shadow-sm"
       style={{
         willChange: 'transform',
         transition: 'box-shadow 0.4s ease, border-color 0.4s ease',
         boxShadow: isHovered
-          ? `0 0 20px ${neon.glow}, 0 0 60px ${neon.glow}, inset 0 0 20px rgba(255,255,255,0.02)`
-          : '0 0 0 transparent',
-        borderColor: isHovered ? neon.border : 'rgba(255,255,255,0.08)',
+          ? '0 12px 48px rgba(0,113,227,0.12), 0 2px 16px rgba(0,0,0,0.06)'
+          : '0 1px 3px rgba(0,0,0,0.04)',
+        borderColor: isHovered ? 'rgba(0,113,227,0.25)' : undefined,
       }}
     >
-      {/* ── Neon glow backdrop ── */}
-      <div
-        className="absolute -inset-px rounded-3xl pointer-events-none transition-opacity duration-500"
-        style={{
-          opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${neon.glow} 0%, transparent 70%)`,
-        }}
-      />
-
-      {/* ── Floating feature annotations (augen.pro style) ── */}
+      {/* ── Floating feature annotations ── */}
       <AnimatePresence>
         {isHovered && features.map((feat, i) => (
           <motion.div
@@ -104,11 +80,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             transition={{ duration: 0.3, delay: i * 0.08, ease }}
             className={`absolute z-20 ${feat.position}`}
           >
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-sm shadow-lg shadow-black/20">
-              <feat.icon size={12} className="text-[#8b5cf6]" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-sm shadow-lg shadow-black/10 border border-black/5">
+              <feat.icon size={12} className="text-[#0071e3]" />
               <div className="flex flex-col">
-                <span className="text-[8px] font-medium text-[#6e6e73] uppercase tracking-wider leading-none">{feat.label}</span>
-                <span className="text-[11px] font-bold text-black leading-tight">{feat.value}</span>
+                <span className="text-[8px] font-medium text-foreground-muted uppercase tracking-wider leading-none">{feat.label}</span>
+                <span className="text-[11px] font-bold text-foreground leading-tight">{feat.value}</span>
               </div>
             </div>
           </motion.div>
@@ -120,35 +96,35 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         {/* Бейдж наличия */}
         {product.stockStatus !== 'ok' && (
           <div className={`absolute top-4 right-4 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold
-            ${product.stockStatus === 'low' ? 'bg-[#ffd60a]/15 text-[#ffd60a]' : 'bg-white/8 text-[#6e6e73]'}`}>
+            ${product.stockStatus === 'low' ? 'bg-[#ffd60a]/15 text-[#ffd60a]' : 'bg-black/5 text-[#6e6e73]'}`}>
             <span className={`w-1 h-1 rounded-full ${stock.dot}`} />
             {stock.label}
           </div>
         )}
 
         {/* Изображение / Placeholder */}
-        <div className="relative aspect-square bg-[#111] overflow-hidden flex items-center justify-center">
-          <div className="absolute inset-0 dot-grid opacity-50" />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="relative aspect-square bg-background-secondary overflow-hidden flex items-center justify-center">
+          <div className="absolute inset-0 dot-grid opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
           {/* Connection lines to annotations (visible on hover) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <line x1="75%" y1="20%" x2="95%" y2="5%" stroke="rgba(0,113,227,0.3)" strokeWidth="1" strokeDasharray="3 3" />
-            <line x1="25%" y1="80%" x2="5%" y2="95%" stroke="rgba(0,113,227,0.3)" strokeWidth="1" strokeDasharray="3 3" />
-            <circle cx="75%" cy="20%" r="3" fill="rgba(0,113,227,0.5)" />
-            <circle cx="25%" cy="80%" r="3" fill="rgba(0,113,227,0.5)" />
+            <line x1="75%" y1="20%" x2="95%" y2="5%" stroke="rgba(0,113,227,0.25)" strokeWidth="1" strokeDasharray="3 3" />
+            <line x1="25%" y1="80%" x2="5%" y2="95%" stroke="rgba(0,113,227,0.25)" strokeWidth="1" strokeDasharray="3 3" />
+            <circle cx="75%" cy="20%" r="3" fill="rgba(0,113,227,0.4)" />
+            <circle cx="25%" cy="80%" r="3" fill="rgba(0,113,227,0.4)" />
           </svg>
 
           <div className="relative z-10 flex flex-col items-center gap-2 group-hover:scale-105 transition-transform duration-500">
-            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-[#3a3a3c]">
+            <div className="w-16 h-16 rounded-2xl bg-black/5 border border-black/8 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-foreground-muted">
                 <rect x="8" y="4" width="16" height="24" rx="3" stroke="currentColor" strokeWidth="1.5"/>
                 <rect x="11" y="7" width="10" height="12" rx="1.5" fill="currentColor" opacity="0.3"/>
                 <circle cx="16" cy="23" r="1.5" fill="currentColor" opacity="0.5"/>
               </svg>
             </div>
             {product.category && (
-              <span className="text-[10px] font-medium text-[#3a3a3c] uppercase tracking-widest">
+              <span className="text-[10px] font-medium text-foreground-muted uppercase tracking-widest">
                 {product.category.name}
               </span>
             )}
@@ -157,12 +133,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
         {/* Контент */}
         <div className="flex flex-col p-5 gap-3 flex-1">
-          <h3 className="text-base font-bold text-white leading-snug line-clamp-2 group-hover:text-white/90 transition-colors">
+          <h3 className="text-base font-bold text-foreground leading-snug line-clamp-2 group-hover:text-foreground-secondary transition-colors">
             {product.name}
           </h3>
 
-          <div className="mt-auto flex items-center justify-between pt-3 border-t border-white/6">
-            <span className="text-lg font-bold text-white">
+          <div className="mt-auto flex items-center justify-between pt-3 border-t border-border">
+            <span className="text-lg font-bold text-foreground">
               {formatPrice(product.sellingPrice)}
             </span>
 
@@ -176,13 +152,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
       </Link>
 
-      {/* Кнопка «Бронь» появляется при hover — как в референсе */}
+      {/* Кнопка «Подробнее» появляется при hover */}
       {product.stockStatus !== 'out' && (
         <div className="relative z-10 px-5 pb-5 -mt-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
           <Link
             href={`/catalog/${product.id}`}
-            data-magnetic
-            className="block w-full text-center text-xs font-bold bg-white text-black px-4 py-2.5 rounded-full hover:bg-gray-100 transition-colors"
+            className="block w-full text-center text-xs font-bold bg-[#0071e3] text-white px-4 py-2.5 rounded-full hover:bg-[#0077ed] transition-colors"
           >
             Подробнее →
           </Link>
