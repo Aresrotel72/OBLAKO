@@ -9,7 +9,6 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 // @ts-ignore
 import LiquidEther from '@/components/LiquidEther'
-import SplitText from '@/components/SplitText'
 import ShinyText from '@/components/ShinyText'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -83,44 +82,72 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* Заголовок */}
-        <div className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-foreground mb-6">
-          <SplitText
-            text="Защити свой"
-            tag="h1"
-            className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-foreground block"
-            delay={40}
-            duration={0.9}
-            from={{ opacity: 0, y: 50 }}
-            to={{ opacity: 1, y: 0 }}
-          />
-          <SplitText
-            text="iPhone."
-            tag="h1"
-            className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-[#0071e3] block"
-            delay={30}
-            duration={0.9}
-            from={{ opacity: 0, y: 50 }}
-            to={{ opacity: 1, y: 0 }}
-          />
-        </div>
+        {/* Заголовок — кинетика слов + новый текст */}
+        <h1 className="font-display font-bold tracking-tighter leading-[0.92] text-foreground mb-6 select-none">
+
+          {/* Строка 1: «Чехол» ← слева, «—» ↓ сверху */}
+          <div className="flex items-baseline justify-center gap-4 sm:gap-6">
+            <motion.span
+              initial={{ opacity: 0, x: -180, rotate: -6 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0 }}
+              className="inline-block text-5xl sm:text-7xl lg:text-8xl"
+            >
+              Чехол
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: -80 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
+              className="inline-block text-4xl sm:text-6xl lg:text-7xl text-foreground-muted font-light"
+            >
+              —
+            </motion.span>
+          </div>
+
+          {/* Строка 2: «это» → справа, «характер.» ↑ снизу + scale */}
+          <div className="flex items-baseline justify-center gap-3 sm:gap-5 mt-1">
+            <motion.span
+              initial={{ opacity: 0, x: 180 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+              className="inline-block text-5xl sm:text-7xl lg:text-8xl text-foreground"
+            >
+              это
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.45, y: 48, rotate: 2 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.42 }}
+              className="inline-block text-5xl sm:text-7xl lg:text-8xl"
+              style={{
+                background: 'linear-gradient(135deg, #0071e3 0%, #5ac8fa 60%, #0071e3 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              характер.
+            </motion.span>
+          </div>
+        </h1>
 
         {/* Подзаголовок */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.25, ease }}
+          transition={{ duration: 0.8, delay: 0.65, ease }}
           className="text-lg sm:text-xl text-foreground-secondary leading-relaxed max-w-xl mx-auto mb-10 font-light"
         >
-          Премиальные чехлы для каждой модели. Актуальные остатки,
-          бронирование онлайн — забирай сегодня.
+          Стиль, который защищает. Реальный остаток —
+          бронируй онлайн, забирай сегодня.
         </motion.p>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease }}
+          transition={{ duration: 0.8, delay: 0.85, ease }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
@@ -150,7 +177,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.7 }}
+          transition={{ duration: 1, delay: 1.05 }}
           className="mt-14 flex flex-wrap justify-center gap-3 text-xs text-foreground-muted"
         >
           {[
