@@ -131,21 +131,21 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </div>
         </div>
 
-        {/* Контент */}
-        <div className="flex flex-col p-5 gap-3 flex-1">
-          <h3 className="text-base font-bold text-foreground leading-snug line-clamp-2 group-hover:text-foreground-secondary transition-colors">
+        {/* Контент — Apple product card style */}
+        <div className="flex flex-col px-4 pb-4 pt-3 gap-1.5 flex-1">
+          <h3 className="text-product-name line-clamp-2 group-hover:text-foreground-secondary transition-colors duration-200">
             {product.name}
           </h3>
 
-          <div className="mt-auto flex items-center justify-between pt-3 border-t border-border">
-            <span className="text-lg font-bold text-foreground">
+          <div className="flex items-center justify-between mt-0.5">
+            <span className="text-price">
               {formatPrice(product.sellingPrice)}
             </span>
 
             {product.stockStatus === 'ok' && (
               <div className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#30d158]" />
-                <span className="text-xs text-[#30d158]">{stock.label}</span>
+                <span className="text-[11px] text-[#30d158]">{stock.label}</span>
               </div>
             )}
           </div>
@@ -154,12 +154,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
       {/* Кнопка «Подробнее» появляется при hover */}
       {product.stockStatus !== 'out' && (
-        <div className="relative z-10 px-5 pb-5 -mt-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+        <div className="relative z-10 px-4 pb-4 -mt-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
           <Link
             href={`/catalog/${product.id}`}
-            className="block w-full text-center text-xs font-bold bg-[#0071e3] text-white px-4 py-2.5 rounded-full hover:bg-[#0077ed] transition-colors"
+            className="block w-full text-center text-[12px] font-semibold bg-[#0071e3] text-white px-4 py-2 rounded-full hover:bg-[#0077ed] transition-colors"
           >
-            Подробнее →
+            Забронировать
           </Link>
         </div>
       )}

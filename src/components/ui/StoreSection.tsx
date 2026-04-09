@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { MapPin, Clock, Send } from 'lucide-react'
+import SectionHeader from './SectionHeader'
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -35,20 +36,12 @@ export default function StoreSection() {
     <section className="w-full py-24 px-4 bg-background border-t border-border">
       <div className="max-w-5xl mx-auto">
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.8, ease }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-5xl font-display font-bold tracking-tight text-foreground mb-3">
-            Приходите к нам.
-          </h2>
-          <p className="text-foreground-secondary text-lg font-light max-w-lg mx-auto">
-            Офлайн-магазин в центре Полоцка. Весь ассортимент вживую, консультация бесплатно.
-          </p>
-        </motion.div>
+        <SectionHeader
+          eyebrow="Полоцк · ТЦ Green, 1 этаж"
+          title="Приходите к нам."
+          subtitle="Офлайн-магазин в центре Полоцка. Весь ассортимент вживую, консультация бесплатно."
+          className="mb-14"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 

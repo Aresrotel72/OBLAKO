@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { CheckCircle, CalendarCheck, MapPin, ShieldCheck } from 'lucide-react'
 import SpotlightCard from '@/components/SpotlightCard'
+import SectionHeader from './SectionHeader'
 
 const features = [
   {
@@ -34,20 +35,12 @@ export default function Features() {
     <section className="py-24 px-4 bg-background-secondary">
       <div className="max-w-5xl mx-auto">
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.8, ease }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-5xl font-display font-bold tracking-tight text-foreground mb-3">
-            Почему OBLAKO
-          </h2>
-          <p className="text-foreground-secondary text-lg font-light">
-            Онлайн-витрина с офлайн-удобством
-          </p>
-        </motion.div>
+        <SectionHeader
+          eyebrow="OBLAKO · Наши преимущества"
+          title="Почему OBLAKO"
+          subtitle="Онлайн-витрина с офлайн-удобством. Всё честно и без лишних шагов."
+          className="mb-14"
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map(({ icon: Icon, title, description }, i) => (

@@ -4,6 +4,7 @@ import type { CaProduct } from '@/types/product'
 import ProductCard from './ProductCard'
 import { ArrowRight } from 'lucide-react'
 import { ALL_DEMO_PRODUCTS } from '@/lib/demo-products'
+import SectionHeader from './SectionHeader'
 
 export default async function PopularProducts() {
   let products: CaProduct[] = []
@@ -24,20 +25,15 @@ export default async function PopularProducts() {
   return (
     <section className="py-20 px-4">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-2">
-              Популярные товары
-            </h2>
-            <p className="text-foreground-muted">Актуальный остаток — обновляется в реальном времени</p>
-          </div>
-          <Link
-            href="/catalog"
-            className="hidden sm:flex items-center gap-1 text-sm text-[#0071e3] hover:underline"
-          >
-            Все товары <ArrowRight size={14} />
-          </Link>
-        </div>
+        <SectionHeader
+          eyebrow="Каталог · Всегда в наличии"
+          title="Популярные товары"
+          subtitle="Актуальный остаток — обновляется в реальном времени."
+          align="left"
+          shopAllHref="/catalog"
+          shopAllLabel="Весь каталог"
+          className="mb-10"
+        />
 
         {error && (
           <div className="rounded-2xl border border-border bg-background-card p-8 text-center text-foreground-muted">
@@ -60,11 +56,8 @@ export default async function PopularProducts() {
         )}
 
         <div className="mt-8 text-center sm:hidden">
-          <Link
-            href="/catalog"
-            className="text-sm text-[#0071e3] hover:underline"
-          >
-            Смотреть все товары →
+          <Link href="/catalog" className="link-apple text-sm">
+            Смотреть все товары <ArrowRight size={13} strokeWidth={1.5} />
           </Link>
         </div>
       </div>

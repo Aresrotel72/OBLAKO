@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Syne, Manrope, Nunito } from "next/font/google"
+import { Syne, Manrope } from "next/font/google"
+import { GeistSans } from "geist/font/sans"
 import "./globals.css"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
@@ -22,13 +23,6 @@ const manrope = Manrope({
   display: "swap",
 })
 
-const nunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-  weight: ["800"],
-  display: "swap",
-})
-
 export const metadata: Metadata = {
   title: "OBLAKO — Мобильные аксессуары",
   description:
@@ -43,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${syne.variable} ${manrope.variable} ${nunito.variable} h-full antialiased`}
+      className={`${syne.variable} ${manrope.variable} ${GeistSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <AuthProvider>

@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "OBLAKO — витрина (Next.js)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3001,
+      "cwd": "/Users/oblako/черный ассистент/OBLAKO---"
+    },
+    {
+      "name": "Чёрный ассистент — POS/ERP (Next.js)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "cwd": "/Users/oblako/черный ассистент/cherniy-assistent"
+    }
+  ]
+}
