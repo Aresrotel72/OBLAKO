@@ -181,9 +181,9 @@ export default function Hero() {
           className="mt-14 flex flex-wrap justify-center gap-3 text-xs text-foreground-muted"
         >
           {[
-            { val: '200+', label: 'моделей чехлов' },
-            { val: '24ч',  label: 'бронирование'   },
-            { val: '14 дн',label: 'возврат'         },
+            { val: '200+', label: 'моделей' },
+            { val: '24ч',  label: 'бронь'   },
+            { val: '100%', label: 'качество' },
           ].map(({ val, label }) => (
             <div key={label} className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-border shadow-sm">
               <span className="font-semibold text-foreground text-sm">{val}</span>
