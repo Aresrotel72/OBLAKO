@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Zap, Sparkles } from 'lucide-react'
+import { Shield, Zap, Sparkles, Hand } from 'lucide-react'
 import type { CaProduct } from '@/types/product'
 import { formatPrice } from '@/lib/utils'
 
@@ -21,21 +22,25 @@ const stockConfig: Record<CaProduct['stockStatus'], { label: string; dot: string
 // Feature annotations — появляются при hover
 function getFeatures(name: string): { label: string; value: string; icon: React.ElementType; position: string }[] {
   const n = name.toLowerCase()
-  if (/кожан|leather/.test(n)) return [
-    { label: 'Материал', value: 'Натуральная кожа', icon: Sparkles, position: '-top-2 -right-2' },
-    { label: 'MagSafe', value: 'Встроен', icon: Zap, position: '-bottom-2 -left-2' },
+  if (/кожан|leather|techwoven/.test(n)) return [
+    { label: 'Покрытие', value: 'Приятный на ощупь слой', icon: Hand, position: '-top-3 -right-3' },
+    { label: 'MagSafe', value: 'Мгновенная зарядка', icon: Zap, position: '-bottom-3 -left-3' },
   ]
   if (/силик|silic/.test(n)) return [
-    { label: 'Защита', value: 'Ударопрочный', icon: Shield, position: '-top-2 -right-2' },
-    { label: 'MagSafe', value: 'Встроен', icon: Zap, position: '-bottom-2 -left-2' },
+    { label: 'Углы', value: 'Усиленная защита углов', icon: Shield, position: '-top-3 -right-3' },
+    { label: 'Покрытие', value: 'Приятный на ощупь слой', icon: Hand, position: '-bottom-3 -left-3' },
   ]
   if (/прозрач|clear|ultra/.test(n)) return [
-    { label: 'Дизайн', value: 'Прозрачный', icon: Sparkles, position: '-top-2 -right-2' },
-    { label: 'Защита', value: 'Антишок', icon: Shield, position: '-bottom-2 -left-2' },
+    { label: 'Дизайн', value: 'Видна красота iPhone', icon: Sparkles, position: '-top-3 -right-3' },
+    { label: 'Защита', value: 'Усиленные углы', icon: Shield, position: '-bottom-3 -left-3' },
+  ]
+  if (/flex|ударо|armor/.test(n)) return [
+    { label: 'Падение', value: 'Защита при падении 3м', icon: Shield, position: '-top-3 -right-3' },
+    { label: 'Углы', value: 'Амортизация ударов', icon: Zap, position: '-bottom-3 -left-3' },
   ]
   return [
-    { label: 'Качество', value: 'Премиум', icon: Sparkles, position: '-top-2 -right-2' },
-    { label: 'MagSafe', value: 'Совместим', icon: Zap, position: '-bottom-2 -left-2' },
+    { label: 'Качество', value: 'Премиум-материалы', icon: Sparkles, position: '-top-3 -right-3' },
+    { label: 'MagSafe', value: 'Полная совместимость', icon: Zap, position: '-bottom-3 -left-3' },
   ]
 }
 
@@ -103,32 +108,50 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         )}
 
         {/* Изображение / Placeholder */}
-        <div className="relative aspect-square bg-background-secondary overflow-hidden flex items-center justify-center">
-          <div className="absolute inset-0 dot-grid opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
+        <div className="relative aspect-square bg-gradient-to-b from-[#f5f5f7] to-[#ececee] overflow-hidden flex items-center justify-center">
           {/* Connection lines to annotations (visible on hover) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <line x1="75%" y1="20%" x2="95%" y2="5%" stroke="rgba(0,113,227,0.25)" strokeWidth="1" strokeDasharray="3 3" />
-            <line x1="25%" y1="80%" x2="5%" y2="95%" stroke="rgba(0,113,227,0.25)" strokeWidth="1" strokeDasharray="3 3" />
-            <circle cx="75%" cy="20%" r="3" fill="rgba(0,113,227,0.4)" />
-            <circle cx="25%" cy="80%" r="3" fill="rgba(0,113,227,0.4)" />
+            <line x1="72%" y1="18%" x2="96%" y2="2%" stroke="rgba(0,113,227,0.4)" strokeWidth="1.5" strokeDasharray="4 3">
+              <animate attributeName="stroke-dashoffset" from="14" to="0" dur="0.8s" fill="freeze" />
+            </line>
+            <line x1="28%" y1="82%" x2="4%" y2="98%" stroke="rgba(0,113,227,0.4)" strokeWidth="1.5" strokeDasharray="4 3">
+              <animate attributeName="stroke-dashoffset" from="14" to="0" dur="0.8s" fill="freeze" />
+            </line>
+            <circle cx="72%" cy="18%" r="3.5" fill="rgba(0,113,227,0.5)">
+              <animate attributeName="r" from="0" to="3.5" dur="0.4s" fill="freeze" />
+            </circle>
+            <circle cx="28%" cy="82%" r="3.5" fill="rgba(0,113,227,0.5)">
+              <animate attributeName="r" from="0" to="3.5" dur="0.4s" fill="freeze" />
+            </circle>
+            {/* Arrowheads */}
+            <polygon points="96,2 90,6 92,0" fill="rgba(0,113,227,0.5)" className="opacity-0 group-hover:opacity-100 transition-opacity delay-300" />
+            <polygon points="4,98 10,94 8,100" fill="rgba(0,113,227,0.5)" className="opacity-0 group-hover:opacity-100 transition-opacity delay-300" />
           </svg>
 
-          <div className="relative z-10 flex flex-col items-center gap-2 group-hover:scale-105 transition-transform duration-500">
-            <div className="w-16 h-16 rounded-2xl bg-black/5 border border-black/8 flex items-center justify-center">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-foreground-muted">
-                <rect x="8" y="4" width="16" height="24" rx="3" stroke="currentColor" strokeWidth="1.5"/>
-                <rect x="11" y="7" width="10" height="12" rx="1.5" fill="currentColor" opacity="0.3"/>
-                <circle cx="16" cy="23" r="1.5" fill="currentColor" opacity="0.5"/>
-              </svg>
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-contain p-3 group-hover:scale-110 transition-transform duration-500"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            />
+          ) : (
+            <div className="relative z-10 flex flex-col items-center gap-2 group-hover:scale-105 transition-transform duration-500">
+              <div className="w-16 h-16 rounded-2xl bg-black/5 border border-black/8 flex items-center justify-center">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-foreground-muted">
+                  <rect x="8" y="4" width="16" height="24" rx="3" stroke="currentColor" strokeWidth="1.5"/>
+                  <rect x="11" y="7" width="10" height="12" rx="1.5" fill="currentColor" opacity="0.3"/>
+                  <circle cx="16" cy="23" r="1.5" fill="currentColor" opacity="0.5"/>
+                </svg>
+              </div>
+              {product.category && (
+                <span className="text-[10px] font-medium text-foreground-muted uppercase tracking-widest">
+                  {product.category.name}
+                </span>
+              )}
             </div>
-            {product.category && (
-              <span className="text-[10px] font-medium text-foreground-muted uppercase tracking-widest">
-                {product.category.name}
-              </span>
-            )}
-          </div>
+          )}
         </div>
 
         {/* Контент — Apple product card style */}

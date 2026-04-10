@@ -38,6 +38,23 @@ export default async function PopularProducts() {
           ))}
         </div>
 
+<<<<<<< HEAD
+=======
+        {products.length === 0 && (
+          <div className="rounded-2xl border border-border bg-background-card p-8 text-center text-foreground-muted">
+            Товары в наличии пока отсутствуют.
+          </div>
+        )}
+
+        {products.length > 0 && (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+
+>>>>>>> 1469d1c (feat: display Apple case photos in ProductCards and fix PopularProducts fallback)
         <div className="mt-8 text-center sm:hidden">
           <Link href="/catalog" className="link-apple text-sm">
             Смотреть все товары <ArrowRight size={13} strokeWidth={1.5} />

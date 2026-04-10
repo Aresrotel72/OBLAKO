@@ -8,6 +8,7 @@ export interface CaProduct {
   unit: string
   category: { id: string; name: string } | null
   stockStatus: 'ok' | 'low' | 'out'
+  image?: string
 }
 
 export interface CaProductsResponse {
