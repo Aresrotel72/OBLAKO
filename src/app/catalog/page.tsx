@@ -7,6 +7,25 @@ import type { CaProduct } from '@/types/product'
 import { DEMO_IPHONE_CASES } from '@/lib/demo-products'
 import BlobBg from '@/components/ui/BlobBg'
 import { Smartphone, Shield, Zap, Headphones, ArrowRight } from 'lucide-react'
+import BlurCrossfade from '@/components/ui/BlurCrossfade'
+
+const CATALOG_SLIDES = [
+  {
+    src: '/showcase/case-colorful.jpg',
+    alt: 'iPhone Cases Collection',
+    caption: 'Премиальная коллекция чехлов для iPhone'
+  },
+  {
+    src: '/showcase/cable-charger.jpg',
+    alt: 'Charging Solutions',
+    caption: 'Быстрые зарядки и надежные кабели'
+  },
+  {
+    src: '/showcase/iphone-lifestyle.jpg',
+    alt: 'Lifestyle Accessories',
+    caption: 'Стиль и защита в каждой детали'
+  }
+]
 
 export const metadata = {
   title: 'Каталог — OBLAKO',
@@ -138,6 +157,17 @@ export default function CatalogPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+      
+      {/* ── Featured Slider ─────────────────────────────────────────── */}
+      <section className="px-4 pb-12">
+        <div className="max-w-6xl mx-auto">
+          <BlurCrossfade 
+            slides={CATALOG_SLIDES} 
+            className="h-[300px] sm:h-[400px]" 
+            interval={5000}
+          />
         </div>
       </section>
 

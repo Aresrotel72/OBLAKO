@@ -1,12 +1,14 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface GallerySlide {
   src: string
@@ -24,9 +26,14 @@ export default function ScrollPinnedGallery({ slides }: ScrollPinnedGalleryProps
   const containerRef = useRef<HTMLDivElement>(null)
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
   const textRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useGSAP(() => {
-    if (!containerRef.current) return
+    if (!containerRef.current || !isClient) return
 
     const images = imageRefs.current.filter(Boolean) as HTMLDivElement[]
     const texts = textRefs.current.filter(Boolean) as HTMLDivElement[]

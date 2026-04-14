@@ -8,6 +8,31 @@ import StoreSection from '@/components/ui/StoreSection'
 import PopularProducts from '@/components/ui/PopularProducts'
 import ProductCardSkeleton from '@/components/ui/ProductCardSkeleton'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+import ScrollPinnedGallery from '@/components/ui/ScrollPinnedGallery'
+
+const SHOWCASE_SLIDES = [
+  {
+    src: '/showcase/case-black.jpg',
+    alt: 'Premium Silicone Cases',
+    title: 'Silicone Case',
+    desc: 'Безупречная форма и защита. Почувствуйте премиальное качество материалов в каждом касании.',
+    accent: '#0071e3'
+  },
+  {
+    src: '/showcase/iphone-clear.jpg',
+    alt: 'MagSafe Accessories',
+    title: 'MagSafe Life',
+    desc: 'Экосистема аксессуаров, которые мгновенно примагничиваются и делают использование iPhone удобнее.',
+    accent: '#5ac8fa'
+  },
+  {
+    src: '/showcase/airpods.jpg',
+    alt: 'Techno Aesthetic',
+    title: 'Techno Style',
+    desc: 'Аксессуары, созданные для тех, кто ценит эстетику высоких технологий и надежность.',
+    accent: '#ae9eff'
+  }
+]
 
 function ProductsSkeleton() {
   return (
@@ -38,6 +63,8 @@ export default function HomePage() {
       <Suspense fallback={<ProductsSkeleton />}>
         <PopularProducts />
       </Suspense>
+
+      <ScrollPinnedGallery slides={SHOWCASE_SLIDES} />
       <ScrollReveal>
         <ModelSelector />
       </ScrollReveal>
