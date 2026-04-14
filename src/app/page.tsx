@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import Hero from '@/components/ui/Hero'
+import ScrollStory from '@/components/ui/ScrollStory'
 import CasesShowcase from '@/components/ui/CasesShowcase'
 import ModelSelector from '@/components/cases/ModelSelector'
 import Features from '@/components/ui/Features'
@@ -26,10 +27,13 @@ export default function HomePage() {
         <Hero />
       </div>
 
+      {/* ② ScrollStory — scroll-анимация */}
+      <ScrollStory />
+
       {/* Bridge: white → warm */}
       <div className="section-bridge from-section-white to-section-warm" />
 
-      {/* ② Витрина чехлов — тёплый молочный */}
+      {/* ③ Витрина чехлов — тёплый молочный */}
       <div className="bg-section-warm">
         <Suspense fallback={<ShowcaseSkeleton />}>
           <CasesShowcase />
@@ -39,12 +43,12 @@ export default function HomePage() {
       {/* Bridge: warm → cream */}
       <div className="section-bridge from-section-warm to-section-cream" />
 
-      {/* ③ Выбор по модели — крем */}
+      {/* ④ Выбор по модели — крем */}
       <div className="bg-section-cream">
         <ModelSelector />
       </div>
 
-      {/* ④ Преимущества — крем (без разрыва) */}
+      {/* ⑤ Преимущества — крем (без разрыва) */}
       <div className="bg-section-cream">
         <Features />
       </div>
@@ -52,7 +56,7 @@ export default function HomePage() {
       {/* Bridge: cream → white */}
       <div className="section-bridge from-section-cream to-section-white" />
 
-      {/* ⑤ Магазин — белый */}
+      {/* ⑥ Магазин — белый */}
       <div className="bg-section-white">
         <StoreSection />
       </div>
