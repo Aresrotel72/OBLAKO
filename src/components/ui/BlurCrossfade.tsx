@@ -32,11 +32,6 @@ export default function BlurCrossfade({
 }: BlurCrossfadeProps) {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(1)
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   const next = useCallback(() => {
     setDirection(1)
@@ -50,25 +45,10 @@ export default function BlurCrossfade({
 
   const slide = slides[current]
 
-  if (!isClient) {
-    return (
-      <div className={`relative overflow-hidden ${rounded} ${className} bg-background-secondary`}>
-        <Image
-          src={slides[0].src}
-          alt={slides[0].alt}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-        />
-      </div>
-    )
-  }
-
   return (
     <div className={`relative overflow-hidden ${rounded} ${className}`}>
       {/* Images */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="popLayout">
         <motion.div
           key={current}
           className="absolute inset-0"

@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 
 const MODEL_GROUPS = [
@@ -55,7 +54,6 @@ const MODEL_GROUPS = [
 
 export default function ModelSelector() {
   const router = useRouter()
-  const [activeSeries, setActiveSeries] = useState(0)
   const [selected, setSelected] = useState<string | null>(null)
 
   function handleSelect(id: string) {
@@ -63,87 +61,59 @@ export default function ModelSelector() {
     router.push(`/cases?model=${id}`)
   }
 
-  const group = MODEL_GROUPS[activeSeries]
-
   return (
     <section className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-
+      <div className="max-w-5xl mx-auto">
         {/* Заголовок */}
         <div className="text-center mb-12">
-          <p className="text-eyebrow mb-3">Чехлы для iPhone</p>
-          <h2 className="text-display text-foreground mb-3">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-3">
             Выбери свою модель
           </h2>
-          <p className="text-foreground-muted text-sm">
+          <p className="text-foreground-muted">
             Показываем только чехлы, которые подходят именно к твоему iPhone
           </p>
         </div>
 
-        {/* Стеклянные вкладки серий */}
-        <div className="glass rounded-2xl p-1.5 flex gap-1 mb-8 shadow-sm">
-          {MODEL_GROUPS.map((g, i) => (
-            <button
-              key={g.series}
-              onClick={() => setActiveSeries(i)}
-              className="relative flex-1 py-2.5 px-2 rounded-xl text-xs font-semibold transition-all duration-200 text-center"
-            >
-              {activeSeries === i && (
-                <motion.span
-                  layoutId="series-active"
-                  className="absolute inset-0 rounded-xl bg-white shadow-sm"
-                  transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-                />
-              )}
-              <span className={`relative z-10 flex items-center justify-center gap-1 ${
-                activeSeries === i ? 'text-foreground' : 'text-foreground-muted'
-              }`}>
-                {g.series}
-                {'badge' in g && g.badge && (
-                  <span className="px-1.5 py-0.5 rounded-full text-[8px] font-bold bg-[#0071e3]/12 text-[#0071e3] tracking-wide">
-                    {g.badge}
+        {/* Группы моделей */}
+        <div className="space-y-8">
+          {MODEL_GROUPS.map((group) => (
+            <div key={group.series}>
+              <div className="flex items-center gap-2 mb-3 px-1">
+                <p className="text-xs font-medium text-foreground-muted uppercase tracking-widest">
+                  {group.series}
+                </p>
+                {'badge' in group && group.badge && (
+                  <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#0071e3]/12 text-[#0071e3] tracking-wide">
+                    {group.badge}
                   </span>
                 )}
-              </span>
-            </button>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {group.models.map(({ id, label }) => (
+                  <button
+                    key={id}
+                    onClick={() => handleSelect(id)}
+                    className={`group relative flex items-center justify-between px-4 py-3 rounded-xl
+                      border text-sm font-medium text-left transition-all duration-200
+                      ${
+                        selected === id
+                          ? 'border-[#0071e3] bg-[#0071e3]/8 text-foreground'
+                          : 'border-border bg-background-card text-foreground-secondary hover:border-[#0071e3]/30 hover:text-foreground hover:bg-[#0071e3]/4'
+                      }`}
+                  >
+                    <span>{label}</span>
+                    <ChevronRight
+                      size={14}
+                      className={`shrink-0 transition-transform duration-200 ${
+                        selected === id ? 'text-[#0071e3]' : 'text-foreground-muted group-hover:translate-x-0.5'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
-
-        {/* Модели активной серии */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSeries}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3"
-          >
-            {group.models.map(({ id, label }) => (
-              <button
-                key={id}
-                onClick={() => handleSelect(id)}
-                className={`group glass-subtle relative flex items-center justify-between px-4 py-3.5 rounded-xl
-                  text-sm font-medium text-left transition-all duration-200 hover:shadow-md
-                  ${selected === id
-                    ? 'ring-1 ring-[#0071e3]/40 bg-white/80 text-foreground'
-                    : 'text-foreground-secondary hover:text-foreground hover:bg-white/70'
-                  }`}
-              >
-                <span>{label}</span>
-                <ChevronRight
-                  size={14}
-                  className={`shrink-0 transition-all duration-200 ${
-                    selected === id
-                      ? 'text-[#0071e3]'
-                      : 'text-foreground-muted group-hover:translate-x-0.5 group-hover:text-foreground'
-                  }`}
-                />
-              </button>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
       </div>
     </section>
   )

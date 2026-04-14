@@ -32,11 +32,17 @@ export default async function PopularProducts() {
           className="mb-10"
         />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {products.length === 0 ? (
+          <div className="rounded-2xl border border-border bg-background-card p-8 text-center text-foreground-muted">
+            Товары в наличии пока отсутствуют.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
 
         <div className="mt-8 text-center sm:hidden">
           <Link href="/catalog" className="link-apple text-sm">
